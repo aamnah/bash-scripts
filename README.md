@@ -19,3 +19,7 @@ The tweaks are:
 The install location is: ~/Dropbox/todo
 
 requires: `wget`
+
+Execute script remotely:
+
+	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt.sh | bash -s
