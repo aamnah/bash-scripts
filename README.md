@@ -18,7 +18,7 @@ The tweaks are:
 
 The install location is: ~/Dropbox/todo
 
-requires: `wget`
+Requires: `wget`
 
 Execute script remotely:
 
