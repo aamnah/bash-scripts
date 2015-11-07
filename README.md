@@ -11,10 +11,10 @@ Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo app
 The tweaks are:
 
 - Sets alias `t`
-- Sets command auto-completion
+- Sets command and alias auto-completion
 - Sets `$PATH`
-- Sets default `t` action (TODOTXT_DEFAULT_ACTION)
-- Sets output by priority and then number (TODOTXT_SORT_COMMAND)
+- Sets default action `TODOTXT_DEFAULT_ACTION`
+- Sets output by priority and then number `TODOTXT_SORT_COMMAND`
 
 The install location is: ~/Dropbox/todo
 
