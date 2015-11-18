@@ -32,4 +32,4 @@ run:
 
 	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt_debian.sh | bash -s
 
-The default install location is: /root/todo
+The default install location is: ~/todo
