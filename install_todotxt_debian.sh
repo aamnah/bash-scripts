@@ -1,7 +1,7 @@
 #!/bin/bash
 
 folder_name='todo/'
-folder_path='$HOME/${install_folder}/'
+folder_path='$HOME/${folder_name}/'
 
 mkdir ${folder_path} && cd ${folder_path}
 wget https://github.com/ginatrapani/todo.txt-cli/archive/master.zip # Download
