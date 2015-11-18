@@ -20,4 +20,3 @@ complete -F _todo t #auto-completion for alias
 export TODOTXT_DEFAULT_ACTION=ls #default action 
 export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n' #sort by priority, then by number 
 " >> ~/.bash_profile
-}
