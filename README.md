@@ -23,3 +23,13 @@ Requires: `wget`
 Execute script remotely:
 
 	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt.sh | bash -s
+
+### install_todotxt_debian.sh
+
+Same as `install_todotxt.sh`, just different install directory. Uses a `folder_name` variable that can be customized by editing the script.
+
+run:
+
+	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt_debian.sh | bash -s
+
+The default install location is: /root/todo
