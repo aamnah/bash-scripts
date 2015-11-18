@@ -7,7 +7,7 @@ mkdir ${folder_path} && cd ${folder_path}
 wget https://github.com/ginatrapani/todo.txt-cli/archive/master.zip # Download
 unzip master.zip # Extract
 mv todo.txt-cli-master/* . # Move extracted files
-rm -rf master.zip LICENSE GEN-VERSION-FILE CONTRIBUTING.md Makefile README.textile tests/ # delete unnecessary files
+rm -rf master.zip LICENSE GEN-VERSION-FILE CONTRIBUTING.md Makefile README.textile tests/ todo.txt-cli-master # delete unnecessary files
 chmod +x todo.sh # make executable
 
 # add tweaks to .bash_prfile
