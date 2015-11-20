@@ -34,8 +34,11 @@ echo -e "<VirtualHost *:80>
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>" > /etc/apache2/sites-available/$1.conf
 
-#enable virtual host file
+# enable new virtual host file
 a2ensite $1.conf
+
+# disable default 
+a2dissite 000-default.conf
 
 # restart apache
 service apache2 restart
