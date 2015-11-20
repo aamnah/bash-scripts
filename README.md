@@ -5,6 +5,21 @@ Misc. bash scripts that i write mostly for fun. These are written for good pract
 
 All **install scripts** begin with a `install_` in the file name.
 
+### create_virtualhost.sh
+Creates a virtual host file. The script takes one argument in the form of domain name, like `mydomain.com`.
+
+What it does:
+- creates directory structure
+- grants permissions
+- creates demo `index.html` for virtual host 
+- creates new virtual host file
+- enables the new virtual host file
+- restarts apache
+
+Execute remotely: 
+
+	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/create_virtualhost.sh | bash -s mydomain.com
+
 ### install_todotxt.sh
 Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo application - in the default Dropbox folder on a Mac. Also configures the recommended [tweaks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks). 
 
