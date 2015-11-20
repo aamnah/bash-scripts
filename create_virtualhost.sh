@@ -29,7 +29,7 @@ echo -e "<VirtualHost *:80>
     ServerAdmin admin@$1
     ServerName $1
     ServerAlias www.$1
-    DocumentRoot /var/www/$1/public_html
+    DocumentRoot /var/www/$1/public_html/
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>" > /etc/apache2/sites-available/$1.conf
