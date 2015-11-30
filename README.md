@@ -20,6 +20,24 @@ Execute remotely:
 
 	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/create_virtualhost.sh | bash -s mydomain.com
 
+### install_flask.sh
+A rough script that takes care of all the steps in installing and setting up a Flask project. There are variables you can edit before running the script. At present, the script does the following:
+
+- apt Update and Upgrade
+- installs `apache2`
+- installs and enables `libapache2-mod-wsgi`
+- installs `pip`
+- installs and activates `virtualenv`
+- creates and enables `VirtualHost` file
+- creates .wsgi script
+- creates `__init__.py`
+- restarts Apache
+
+To run, simply do `bash install_flask.sh`. To run remotely:
+
+	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_flask.sh | bash
+
+
 ### install_todotxt.sh
 Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo application - in the default Dropbox folder on a Mac. Also configures the recommended [tweaks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks). 
 
