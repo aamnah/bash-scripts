@@ -60,7 +60,7 @@ tweaks() {
 	echo -e "
 
 ### todo.txt
-PATH=$PATH:\"$HOME/Dropbox/todo/\" #path
+PATH=$PATH:\"$HOME/Dropbox/todo\" #path
 alias t='$HOME/Dropbox/todo/todo.sh -d $HOME/Dropbox/todo/todo.cfg' #alias
 source $HOME/Dropbox/todo/todo_completion #auto-completion
 complete -F _todo t #auto-completion for alias
