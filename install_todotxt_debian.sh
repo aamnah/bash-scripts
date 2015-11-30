@@ -13,7 +13,7 @@ chmod +x todo.sh # make executable
 # add tweaks to .bash_prfile
 echo -e "
 ### todo.txt
-PATH=$PATH:\"${folder_path}\" #path
+PATH=$PATH:\"${folder_path}" #path
 alias t='${folder_path}todo.sh -d ${folder_path}todo.cfg #alias'
 source ${folder_path}todo_completion #auto-completion
 complete -F _todo t #auto-completion for alias
