@@ -31,8 +31,13 @@ echo -e "<VirtualHost *:80>
     ServerName $1
     ServerAlias www.$1
     DocumentRoot /var/www/$1/public_html/
+    
+    # Logs
     ErrorLog /var/www/$1/logs/error.log
     CustomLog /var/www/$1/logs/access.log combined
+    
+    # Custom php.ini path
+    PHPINIDir /var/www/$1/public_html/
 </VirtualHost>" > /etc/apache2/sites-available/$1.conf
 
 # enable new virtual host file
