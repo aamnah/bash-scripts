@@ -66,3 +66,8 @@ run:
 	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt_debian.sh | bash -s
 
 The default install location is: ~/todo
+
+### install_webmin_debian
+Installs Webmin on Debian. Adds Webmin to `sources.list`, adds GPG key, updates apt and installs Webmin. Also adds a rule for Webmin in UFW.
+
+	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_webmin_debian.sh | bash
