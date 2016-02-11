@@ -37,7 +37,7 @@ echo -e "<VirtualHost *:80>
     CustomLog /var/www/$1/logs/access.log combined
     
     # Custom php.ini path
-    PHPINIDir /var/www/$1/public_html/ #PHPINIDir will give an Apache config test failed error if PHP is not installed
+    PHPINIDir /var/www/$1/public_html/
 </VirtualHost>" > /etc/apache2/sites-available/$1.conf
 
 # enable new virtual host file
