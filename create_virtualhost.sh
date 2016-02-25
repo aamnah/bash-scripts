@@ -32,6 +32,12 @@ echo -e "<VirtualHost *:80>
     ServerAlias www.$1
     DocumentRoot /var/www/$1/public_html/
     
+    # .htaccess
+    <Directory /var/www/$1/public_html/>
+      Options Indexes FollowSymLinks
+      AllowOverride All
+    </Directory>
+    
     # Logs
     ErrorLog /var/www/$1/logs/error.log
     CustomLog /var/www/$1/logs/access.log combined
