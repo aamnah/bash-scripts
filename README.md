@@ -39,6 +39,13 @@ To run, simply do `bash install_flask.sh`. To run remotely:
 
 	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_flask.sh | bash
 
+### install_imgcat.sh
+
+[imgcat](https://www.iterm2.com/images.html) is a script that previews images and GIFs right in the Terminal. You can see a gif in the Terminal with `img foo.gif` or a jpeg with `img bar.jpg`..
+
+To run, simply do `bash install_imgcat.sh`. To run remotely:
+
+	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_imgcat.sh | bash
 
 ### install_todotxt.sh
 Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo application - in the default Dropbox folder on a Mac. Also configures the recommended [tweaks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks). 
