@@ -50,6 +50,20 @@ To run, simply do `bash install_imgcat.sh`. To run remotely:
 
 	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_imgcat.sh | bash
 
+### install_nodejs.sh
+
+Removes the pre-installed Node.js on Raspbery Pi (Raspbian Jessy) and installs the latest release. The script:
+
+- Uninstalls `nodejs`, `nodejs-legacy`, `nodered` and `npm`
+- Downloads latest release from Heroku servers
+- Installs latest Node.js release for ARM computers (i.e. Raspberry Pi)
+- Cleans up temporary install files and `autoremove`
+- Confirms successful install and Node.js version
+
+To run, simply do `bash install_nodejs.sh`. To run remotely:
+
+	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_nodejs.sh | bash
+
 ### install_todotxt.sh
 Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo application - in the default Dropbox folder on a Mac. Also configures the recommended [tweaks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks). 
 
