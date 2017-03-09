@@ -39,6 +39,23 @@ To run, simply do `bash install_flask.sh`. To run remotely:
 
 	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_flask.sh | bash
 
+### install_froxlor_debian.sh
+Installs [Froxlor](https://froxlor.org/) Server Management Panel.
+
+What it does:
+- adds Froxlor repo
+- adds Froxlor approve key for packages
+- updates system
+- installs Froxlor
+- sets directory permissions
+- provides a link to continue with web install
+
+Execute remotely: 
+
+	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_froxlor_debian.sh | bash
+
+Note: LAMP needs to be installed already
+
 ### install_imgcat.sh
 
 [imgcat](https://www.iterm2.com/images.html) is a script that previews images and GIFs right in the Terminal. You can see a gif in the Terminal with `img foo.gif` or a jpeg with `img bar.jpg`..
