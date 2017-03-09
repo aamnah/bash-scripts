@@ -70,7 +70,7 @@ showUsage() {
 disableDefault() {
   # Disable the default Apache virtual host
   echo -e "\n${Cyan}Disabling default virtual host .. ${Color_Off}"
-  sudo a2dissite *default
+  sudo a2dissite 000-default
 }
 
 enableSite() {
