@@ -32,7 +32,7 @@ checkApacheInstall() {
   if [[ ${APACHE} = "" ]]; then
     echo -e "\n${Red}Apache is not installed, aborting.${Color_Off} You can install Apache with: ${Cyan}sudo apt-get install apache2${Color_Off} and try again"
     # sudo apt-get install apache2 apache2-utils ssl-cert libexpat1 -y
-    exit 1
+    exit 2
   fi
 }
 
@@ -43,11 +43,11 @@ checkExistingConf() {
   # check if file already exists and is not empty
   if [ -s "${PATH_CONF}" ]; then
     echo -e "\n${Red}${PATH_CONF} already EXISTS and is NOT EMPTY. Aborting ${Color_Off}"
-    exit 2
+    exit 3
   #check if file already exists
   elif [ -e "${PATH_CONF}" ]; then
     echo -e "\n${Yellow}${PATH_CONF} already EXISTS. Aborting ${Color_Off}"
-    exit 2
+    exit 3
   fi
 }
 
@@ -58,7 +58,7 @@ checkExistingDir() {
   # check if directory already exists and is not empty
   if [ -d "${PATH_WWW}" ]; then
     echo -e "\n${Red}${PATH_WWW} already EXISTS. Aborting ${Color_Off}"
-    exit 3
+    exit 4
   fi 
 }
 
@@ -177,17 +177,20 @@ SETUP() {
 
   if [ $# -eq 0 ]; then # if no. of args provided is 0
     showUsage
+    exit 1
   elif [ $# -gt 1 ]; then # if no. of args (domains) provided is more than 1
     checkApacheInstall # check if Apache is installed
-    for domain in "$@" # for every argument in all arguments provided `$@`
+    for arg in "$@" # for every argument in all arguments provided `$@`
     do
-      DOMAIN=${domain}
+      DOMAIN=${arg}
       SETUP # run the setup script
     done
     restartApache
+    exit 0
   else
     checkApacheInstall # check if Apache is installed
     DOMAIN=$1
     SETUP # run the setup script
     restartApache
+    exit 0
   fi
