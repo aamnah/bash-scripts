@@ -22,7 +22,9 @@ Execute remotely:
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/create_virtualhost.sh | bash -s mydomain.com
 ```
 
-Note: The `PHPINIDir` directive in the virtual host conf file  will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
+Notes: 
+- The `PHPINIDir` directive in the virtual host conf file  will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
+- Sets the directory ownership for the user who ran the script 
 
 ### install_flask.sh
 A rough script that takes care of all the steps in installing and setting up a Flask project. There are variables you can edit before running the script. At present, the script does the following:
