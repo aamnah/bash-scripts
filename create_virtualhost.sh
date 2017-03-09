@@ -1,20 +1,36 @@
-# create_virtualHosts
-# derived from: https://www.digitalocean.com/community/tutorials/how-to-set-up-apache-virtual-hosts-on-ubuntu-14-04-lts
 
-# create dirs
+#!/bin/bash
+
+###################################################################
+#         Author: Aamnah Akram
+#           Link: http://github.com/aamnah/bash-scripts
+#    Description: Sets up a domain for hosting
+#            Run: bash ceate_virtualhost.sh mydomain.com
+###################################################################
+
+COLOR_CYAN='\033[0;36m'   # Cyan
+COLOR_GREEN='\033[0;32m'  # Green
+COLOR_BGREEN='\033[1;32m' # Bold Green
+COLOR_RED='\033[0;31m'    # Red
+COLOR_OFF='\033[0m'       # Color Reset
+
+# create dir
+echo -e "\n${COLOR_CYAN}Creating public_html directory .. ${COLOR_OFF}"
 mkdir -p /var/www/$1/public_html
-mkdir -p /var/www/$1/logs
 
 # grant perms
+# sets the user running the script as owner
+echo -e "\n${COLOR_CYAN}Setting Permissions .. ${COLOR_OFF}"
 sudo chown -R $USER:$USER /var/www/$1/public_html
 
 # set perms
 chmod -R 755 /var/www
 
 # demo pages
+echo -e "\n${COLOR_CYAN}Creating an index.html demo page .. ${COLOR_OFF}"
 touch /var/www/$1/public_html/index.html
 
-echo -e "<html>
+echo -e "\n${COLOR_CYAN}<html>
   <head>
     <title>Welcome to $1!</title>
   </head>
@@ -25,6 +41,7 @@ echo -e "<html>
 " >> /var/www/$1/public_html/index.html
 
 # create virtual host file
+echo -e "\n${COLOR_CYAN}Creating virtual host file for the domain $1 .. ${COLOR_OFF}"
 touch /etc/apache2/sites-available/$1.conf
 echo -e "<VirtualHost *:80>
     ServerAdmin admin@$1
@@ -46,11 +63,16 @@ echo -e "<VirtualHost *:80>
     # PHPINIDir /var/www/$1/public_html/
 </VirtualHost>" > /etc/apache2/sites-available/$1.conf
 
-# enable new virtual host file
+#enable new virtual host file
+echo -e "\n${COLOR_CYAN}Enabling new host file .. ${COLOR_OFF}"
 a2ensite $1.conf
 
-# disable default 
+#disable default virtual host
+echo -e "\n${COLOR_CYAN}Disabling default virtual host .. ${COLOR_OFF}"
 a2dissite 000-default.conf
 
 # restart apache
+echo -e "\n${COLOR_CYAN}Restarting Apache .. ${COLOR_OFF}"
 service apache2 restart
+
+echo -e "\n${COLOR_GREEN}$1 has been successfully set up! ${COLOR_OFF}"
