@@ -2,6 +2,7 @@ apt-get update -y
 
 # Apache
 apt-get install apache2 apache2-doc apache2-utils libexpat1 ssl-cert -y
+# check Apache configuration: apachectl configtest
 
 # PHP and Modules
 # PHP5
