@@ -7,78 +7,171 @@
 #            Run: bash ceate_virtualhost.sh mydomain.com
 ###################################################################
 
-# https://gist.github.com/aamnah/265f2433659b762b480c
-
-COLOR_CYAN='\033[0;36m'   # Cyan
-COLOR_GREEN='\033[0;32m'  # Green
-COLOR_BGREEN='\033[1;32m' # Bold Green
-COLOR_RED='\033[0;31m'    # Red
-COLOR_OFF='\033[0m'       # Color Reset
-
-# exit if a domain is not provided
-# exit if file/dir already exists
+# TO-DO
+# DONE: exit if a domain is not provided
+# DONE: exit if file/dir already exists
+# DONE: check if Apache is installed
 # take multiple domains as input
 # set up hostnames `sudo nano /etc/hosts`
 
-# create dir
-echo -e "\n${COLOR_CYAN}Creating public_html directory /var/www/$1/public_html .. ${COLOR_OFF}"
-mkdir -p /var/www/$1/public_html
+# Color Reset
+Color_Off='\033[0m'       # Reset
 
-# grant perms
-# sets the user running the script as owner
-echo -e "\n${COLOR_CYAN}Setting Permissions .. ${COLOR_OFF}"
-sudo chown -R $USER:$USER /var/www/$1/public_html
+# Regular Colors
+Red='\033[0;31m'          # Red
+Green='\033[0;32m'        # Green
+Yellow='\033[0;33m'       # Yellow
+Blue='\033[0;34m'         # Blue
+Purple='\033[0;35m'       # Purple
+Cyan='\033[0;36m'         # Cyan
 
-# set perms
-chmod -R 755 /var/www
+DOMAIN=$1
 
-# demo pages
-echo -e "\n${COLOR_CYAN}Creating an index.html demo page .. ${COLOR_OFF}"
-touch /var/www/$1/public_html/index.html
+checkApacheInstall() {
+  # Exit if Apache isn't installed
+  APACHE=`find / -name apachectl`
+  if [[ ${APACHE} = "" ]]; then
+    echo -e "\n${Red}Apache is not installed, aborting.${Color_Off} You can install Apache with: ${Cyan}sudo apt-get install apache2${Color_Off} and try again"
+    # sudo apt-get install apache2 apache2-utils ssl-cert libexpat1 -y
+    exit 1
+  fi
+}
 
-echo -e "<html>
+checkExistingConf() {
+  # Exit if virtualhost conf file exists for the given domain
+  PATH_CONF="/etc/apache2/sites-available/${DOMAIN}.conf"
+  
+  # check if file already exists and is not empty
+  if [ -s "${PATH_CONF}" ]; then
+    echo -e "\n${Red}${PATH_CONF} already EXISTS and is NOT EMPTY. Aborting ${Color_Off}"
+    exit 2
+  #check if file already exists
+  elif [ -e "${PATH_CONF}" ]; then
+    echo -e "\n${Yellow}${PATH_CONF} already EXISTS. Aborting ${Color_Off}"
+    exit 2
+  fi
+}
+
+checkExistingDir() {
+  # Exit if a directory exits in /var/www for the given domain
+  PATH_WWW="/var/www/${DOMAIN}"
+
+  # check if directory already exists and is not empty
+  if [ -d "${PATH_WWW}" ]; then
+    echo -e "\n${Red}${PATH_WWW} already EXISTS and is NOT EMPTY. Aborting ${Color_Off}"
+    exit 3
+  fi 
+}
+
+showUsage() {
+  echo -e "\nUsage: please provide a domain name (FQDN)"
+}
+
+disableDefault() {
+  # Disable the default Apache virtual host
+  echo -e "\n${Cyan}Disabling default virtual host .. ${Color_Off}"
+  sudo a2dissite *default
+}
+
+enableSite() {
+  # Enable site
+  echo -e "\n${Cyan}Enabling ${DOMAIN} .. ${Color_Off}"
+  sudo a2ensite ${DOMAIN}.conf
+}
+
+restartApache() {
+  # Restart Apache
+  echo -e "\n${Cyan}Restarting Apache .. ${Color_Off}"
+  sudo service apache2 restart
+}
+
+createFiles() {
+  # Make directories
+  echo -e "\n${Cyan}Creating directory structure .. ${Color_Off}"
+  mkdir -p /var/www/${DOMAIN}/public_html
+  mkdir /var/www/${DOMAIN}/backups
+}
+
+demoFile() {
+  # Demo index.html page
+  echo -e "\n${Cyan}Creating demo index.html .. ${Color_Off}"
+  touch /var/www/${DOMAIN}/public_html/index.html
+
+  echo -e "<DOCTYPE html>
+<html lang='en'>
   <head>
-    <title>Welcome to $1!</title>
+    <title>Welcome to ${DOMAIN}!</title>
   </head>
   <body>
-    <h1>Success! The $1 virtual host is working!</h1>
+    <h1>Success! The ${DOMAIN} virtual host is working!</h1>
   </body>
 </html>
-" > /var/www/$1/public_html/index.html
+" > /var/www/${DOMAIN}/public_html/index.html
+}
 
-# create virtual host file
-echo -e "\n${COLOR_CYAN}Creating virtual host file for the domain $1 .. ${COLOR_OFF}"
-touch /etc/apache2/sites-available/$1.conf
-echo -e "<VirtualHost *:80>
-    ServerAdmin admin@$1
-    ServerName $1
-    ServerAlias www.$1
-    DocumentRoot /var/www/$1/public_html/
-    
-    # .htaccess
-    <Directory /var/www/$1/public_html/>
-      Options Indexes FollowSymLinks
+setPerms() {
+  # set user
+  # sets the user running the script as owner
+  echo -e "\n${Cyan}Setting Permissions .. ${Color_Off}"
+  # sudo chown -R www-data:www-data /var/www/${DOMAIN}
+  sudo chown -R $USER:$USER /var/www/${DOMAIN}
+
+  # set directory permissions
+  chmod -R 755 /var/www/${DOMAIN}
+}
+
+createConf() {
+  # create virtual host file
+  echo -e "\n${Cyan}Creating virtual host file for ${DOMAIN} .. ${Color_Off}"
+  touch /etc/apache2/sites-available/${DOMAIN}.conf
+  
+  # add config
+  echo -e "# domain: ${DOMAIN}
+# public: /var/www/${DOMAIN}/public_html/
+
+<VirtualHost *:80>
+
+    # Admin email, Server Name (domain name), and any aliases
+    ServerAdmin webmaster@${DOMAIN}
+    ServerName ${DOMAIN}
+    ServerAlias www.${DOMAIN}
+  
+    # Index file and Document Root (where the public files are located)
+    DirectoryIndex index.html index.php
+    DocumentRoot /var/www/${DOMAIN}/public_html
+
+    # Allow .htaccess and Rewrites
+    <Directory /var/www/${DOMAIN}/public_html>
+      Options FollowSymLinks
       AllowOverride All
     </Directory>
     
-    # Logs
-    ErrorLog /var/www/$1/logs/error.log
-    CustomLog /var/www/$1/logs/access.log combined
+    # Log file locations
+    LogLevel warn
+    ErrorLog /var/www/${DOMAIN}/log/error.log
+    CustomLog /var/www/${DOMAIN}/log/access.log combined
     
     # Custom php.ini path
-    # PHPINIDir /var/www/$1/public_html/
-</VirtualHost>" > /etc/apache2/sites-available/$1.conf
+    # PHPINIDir /var/www/${DOMAIN}/public_html/
 
-#enable new virtual host file
-echo -e "\n${COLOR_CYAN}Enabling new host file .. ${COLOR_OFF}"
-a2ensite $1.conf
+</VirtualHost>" > /etc/apache2/sites-available/${DOMAIN}.conf
+}
 
-#disable default virtual host
-echo -e "\n${COLOR_CYAN}Disabling default virtual host .. ${COLOR_OFF}"
-a2dissite 000-default.conf
+# EXECUTE
+#########################################
 
-# restart apache
-echo -e "\n${COLOR_CYAN}Restarting Apache .. ${COLOR_OFF}"
-service apache2 restart
+if [ $# -eq 0 ]; then # if no. of args provided is 0
+  showUsage
+else
+  checkApacheInstall # check if Apache is installed
+  checkExistingConf # check if a .conf file exists for the given domain
+  checkExistingDir # check if a directory in /var/www/ exists for the given domain
 
-echo -e "\n${COLOR_GREEN}$1 has been successfully set up! ${COLOR_OFF}"
+  createFiles
+  createConf
+  enableSite
+  setPerms
+  demoFile
+  restartApache
+  echo -e "\n${Green}${DOMAIN} has been successfully set up! ${Color_Off}"
+fi
