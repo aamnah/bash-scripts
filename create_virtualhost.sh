@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 ###################################################################
@@ -8,14 +7,21 @@
 #            Run: bash ceate_virtualhost.sh mydomain.com
 ###################################################################
 
+# https://gist.github.com/aamnah/265f2433659b762b480c
+
 COLOR_CYAN='\033[0;36m'   # Cyan
 COLOR_GREEN='\033[0;32m'  # Green
 COLOR_BGREEN='\033[1;32m' # Bold Green
 COLOR_RED='\033[0;31m'    # Red
 COLOR_OFF='\033[0m'       # Color Reset
 
+# exit if a domain is not provided
+# exit if file/dir already exists
+# take multiple domains as input
+# set up hostnames `sudo nano /etc/hosts`
+
 # create dir
-echo -e "\n${COLOR_CYAN}Creating public_html directory .. ${COLOR_OFF}"
+echo -e "\n${COLOR_CYAN}Creating public_html directory /var/www/$1/public_html .. ${COLOR_OFF}"
 mkdir -p /var/www/$1/public_html
 
 # grant perms
@@ -30,7 +36,7 @@ chmod -R 755 /var/www
 echo -e "\n${COLOR_CYAN}Creating an index.html demo page .. ${COLOR_OFF}"
 touch /var/www/$1/public_html/index.html
 
-echo -e "\n${COLOR_CYAN}<html>
+echo -e "<html>
   <head>
     <title>Welcome to $1!</title>
   </head>
@@ -38,7 +44,7 @@ echo -e "\n${COLOR_CYAN}<html>
     <h1>Success! The $1 virtual host is working!</h1>
   </body>
 </html>
-" >> /var/www/$1/public_html/index.html
+" > /var/www/$1/public_html/index.html
 
 # create virtual host file
 echo -e "\n${COLOR_CYAN}Creating virtual host file for the domain $1 .. ${COLOR_OFF}"
