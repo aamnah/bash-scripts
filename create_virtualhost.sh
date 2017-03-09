@@ -169,7 +169,7 @@ SETUP() {
   disableDefault
   setPerms
   demoFile
-  echo -e "${Green}${DOMAIN} has been successfully set up! ${Color_Off} \n"
+  echo -e "${Green}${DOMAIN} has been successfully set up! ${Color_Off}"
 }
 
 # EXECUTE
