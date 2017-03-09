@@ -18,7 +18,9 @@ What it does:
 
 Execute remotely: 
 
-	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/create_virtualhost.sh | bash -s mydomain.com
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/create_virtualhost.sh | bash -s mydomain.com
+```
 
 Note: The `PHPINIDir` directive in the virtual host conf file  will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
 
@@ -37,7 +39,9 @@ A rough script that takes care of all the steps in installing and setting up a F
 
 To run, simply do `bash install_flask.sh`. To run remotely:
 
-	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_flask.sh | bash
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_flask.sh | bash
+```
 
 ### install_froxlor_debian.sh
 Installs [Froxlor](https://froxlor.org/) Server Management Panel.
@@ -52,7 +56,9 @@ What it does:
 
 Execute remotely: 
 
-	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_froxlor_debian.sh | bash
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_froxlor_debian.sh | bash
+```
 
 Note: LAMP needs to be installed already
 
@@ -65,7 +71,9 @@ Note: LAMP needs to be installed already
 
 To run, simply do `bash install_imgcat.sh`. To run remotely:
 
-	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_imgcat.sh | bash
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_imgcat.sh | bash
+```
 
 ### install_nodejs.sh
 
@@ -79,7 +87,9 @@ Removes the pre-installed Node.js on Raspbery Pi (Raspbian Jessy) and installs t
 
 To run, simply do `bash install_nodejs.sh`. To run remotely:
 
-	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_nodejs.sh | bash
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_nodejs.sh | bash
+```
 
 ### install_todotxt.sh
 Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo application - in the default Dropbox folder on a Mac. Also configures the recommended [tweaks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks). 
@@ -98,7 +108,9 @@ Requires: `wget`
 
 Execute script remotely:
 
-	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt.sh | bash -s
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt.sh | bash -s
+```
 
 ### install_todotxt_debian.sh
 
@@ -106,11 +118,15 @@ Same as `install_todotxt.sh`, just different install directory. Uses a `folder_n
 
 run:
 
-	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt_debian.sh | bash -s
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt_debian.sh | bash -s
+```
 
 The default install location is: ~/todo
 
 ### install_webmin_debian.sh
 Installs Webmin on Debian. Adds Webmin to `sources.list`, adds GPG key, updates apt and installs Webmin. Also adds a rule for Webmin in UFW.
 
-	curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_webmin_debian.sh | bash
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_webmin_debian.sh | bash
+```
