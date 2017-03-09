@@ -111,11 +111,12 @@ demoFile() {
 }
 
 setPerms() {
-  # set user
-  # sets the user running the script as owner
   echo -e "\n${Cyan}Setting Permissions .. ${Color_Off}"
-  # sudo chown -R www-data:www-data /var/www/${DOMAIN}
-  sudo chown -R $USER:$USER /var/www/${DOMAIN}
+  # sets the user running the script as owner
+  # sudo chown -R $USER:$USER /var/www/${DOMAIN}
+
+  # set www-data as the owner of the domain
+  sudo chown -R www-data:www-data /var/www/${DOMAIN}
 
   # set directory permissions
   chmod -R 755 /var/www/${DOMAIN}
