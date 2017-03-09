@@ -25,7 +25,6 @@ Blue='\033[0;34m'         # Blue
 Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
 
-DOMAIN=$1
 
 checkApacheInstall() {
   # Exit if Apache isn't installed
@@ -69,13 +68,13 @@ showUsage() {
 
 disableDefault() {
   # Disable the default Apache virtual host
-  echo -e "\n${Cyan}Disabling default virtual host .. ${Color_Off}"
-  sudo a2dissite 000-default
+  echo -e "${Cyan}Disabling default virtual host .. ${Color_Off}"
+  sudo a2dissite 000-default > /dev/null
 }
 
 enableSite() {
   # Enable site
-  echo -e "\n${Cyan}Enabling ${DOMAIN} .. ${Color_Off}"
+  echo -e "${Cyan}Enabling ${DOMAIN} .. ${Color_Off}"
   sudo a2ensite ${DOMAIN}.conf > /dev/null
 }
 
@@ -95,7 +94,7 @@ createFiles() {
 
 demoFile() {
   # Demo index.html page
-  echo -e "\n${Cyan}Creating demo index.html .. ${Color_Off}"
+  echo -e "${Cyan}Creating demo index.html .. ${Color_Off}"
   touch /var/www/${DOMAIN}/public_html/index.html
 
   echo -e "<DOCTYPE html>
@@ -111,7 +110,7 @@ demoFile() {
 }
 
 setPerms() {
-  echo -e "\n${Cyan}Setting Permissions .. ${Color_Off}"
+  echo -e "${Cyan}Setting Permissions .. ${Color_Off}"
   # sets the user running the script as owner
   # sudo chown -R $USER:$USER /var/www/${DOMAIN}
 
@@ -124,7 +123,7 @@ setPerms() {
 
 createConf() {
   # create virtual host file
-  echo -e "\n${Cyan}Creating virtual host file for ${DOMAIN} .. ${Color_Off}"
+  echo -e "${Cyan}Creating virtual host file for ${DOMAIN} .. ${Color_Off}"
   touch /etc/apache2/sites-available/${DOMAIN}.conf
   
   # add config
@@ -160,21 +159,35 @@ createConf() {
 </VirtualHost>" > /etc/apache2/sites-available/${DOMAIN}.conf
 }
 
-# EXECUTE
-#########################################
-
-if [ $# -eq 0 ]; then # if no. of args provided is 0
-  showUsage
-else
-  checkApacheInstall # check if Apache is installed
+SETUP() {
   checkExistingConf # check if a .conf file exists for the given domain
   checkExistingDir # check if a directory in /var/www/ exists for the given domain
 
   createFiles
   createConf
   enableSite
+  disableDefault
   setPerms
   demoFile
-  restartApache
-  echo -e "\n${Green}${DOMAIN} has been successfully set up! ${Color_Off}"
-fi
+  echo -e "${Green}${DOMAIN} has been successfully set up! ${Color_Off} \n"
+}
+
+# EXECUTE
+#########################################
+
+  if [ $# -eq 0 ]; then # if no. of args provided is 0
+    showUsage
+  elif [ $# -gt 1 ]; then # if no. of args (domains) provided is more than 1
+    checkApacheInstall # check if Apache is installed
+    for domain in "$@" # for every argument in all arguments provided `$@`
+    do
+      DOMAIN=${domain}
+      SETUP # run the setup script
+    done
+    restartApache
+  else
+    checkApacheInstall # check if Apache is installed
+    DOMAIN=$1
+    SETUP # run the setup script
+    restartApache
+  fi
