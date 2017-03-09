@@ -76,7 +76,7 @@ disableDefault() {
 enableSite() {
   # Enable site
   echo -e "\n${Cyan}Enabling ${DOMAIN} .. ${Color_Off}"
-  sudo a2ensite ${DOMAIN}.conf
+  sudo a2ensite ${DOMAIN}.conf > /dev/null
 }
 
 restartApache() {
@@ -89,6 +89,7 @@ createFiles() {
   # Make directories
   echo -e "\n${Cyan}Creating directory structure .. ${Color_Off}"
   mkdir -p /var/www/${DOMAIN}/public_html
+  mkdir /var/www/${DOMAIN}/logs
   mkdir /var/www/${DOMAIN}/backups
 }
 
@@ -148,8 +149,8 @@ createConf() {
     
     # Log file locations
     LogLevel warn
-    ErrorLog /var/www/${DOMAIN}/log/error.log
-    CustomLog /var/www/${DOMAIN}/log/access.log combined
+    ErrorLog /var/www/${DOMAIN}/logs/error.log
+    CustomLog /var/www/${DOMAIN}/logs/access.log combined
     
     # Custom php.ini path
     # PHPINIDir /var/www/${DOMAIN}/public_html/
