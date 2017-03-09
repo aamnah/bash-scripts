@@ -11,7 +11,7 @@
 # DONE: exit if a domain is not provided
 # DONE: exit if file/dir already exists
 # DONE: check if Apache is installed
-# take multiple domains as input
+# DONE: take multiple domains as input
 # set up hostnames `sudo nano /etc/hosts`
 
 # Color Reset
