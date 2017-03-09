@@ -58,7 +58,7 @@ checkExistingDir() {
 
   # check if directory already exists and is not empty
   if [ -d "${PATH_WWW}" ]; then
-    echo -e "\n${Red}${PATH_WWW} already EXISTS and is NOT EMPTY. Aborting ${Color_Off}"
+    echo -e "\n${Red}${PATH_WWW} already EXISTS. Aborting ${Color_Off}"
     exit 3
   fi 
 }
