@@ -129,6 +129,7 @@ createConf() {
   # add config
   echo -e "# domain: ${DOMAIN}
 # public: /var/www/${DOMAIN}/public_html/
+# logs: /var/www/${DOMAIN}/logs/
 
 <VirtualHost *:80>
 
