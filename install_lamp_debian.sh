@@ -4,7 +4,7 @@
 #         Author: Aamnah Akram
 #           Link: http://github.com/aamnah/bash-scripts
 #    Description: Installs an AMP stack and PHPMyAdmin plus tweaks. For Debian based systems.
-#            Run: bash create_virtualhost.sh mydomain.com
+#            Run: bash install_lamp_debian.sh
 #          Notes: In case of any errors (e.g. MySQL) just re-run the script. 
 #                 Nothing will be re-installed except for the packages with errors.
 ###################################################################
