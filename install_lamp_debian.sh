@@ -21,7 +21,7 @@ apt-get install apache2 apache2-doc apache2-utils libexpat1 ssl-cert -y
 # apt-get install php5.6 libapache2-mod-php5.6 php5.6-cli php5.6-common php5.6-curl php5.6-dev php5.6-gd php5.6-intl php5.6-mcrypt php5.6-mbstring php5.6-mysql  php5.6-recode php5.6-xsl php5.6-pspell php5.6-ps php5.6-imagick php-pear -y
 
 # PHP7
-apt-get install php7.0 libapache2-mod-php7.0 php7.0-cli php7.0-common php7.0-curl php7.0-dev php7.0-gd php7.0-intl php7.0-mcrypt php7.0-mbstring php7.0-mysql php7.0-pspell php7.0-recode php7.0-xsl php-imagick php-pear -y
+apt-get install php php7.1-common php7.1-curl php7.1-dev php7.1-gd php7.1-intl php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-pspell php7.1-recode php7.1-xsl php-imagick php-pear -y
 
 # MySQL
 # will prompt for password
