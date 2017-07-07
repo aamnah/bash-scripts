@@ -45,7 +45,8 @@ chown -R www-data:www-data /var/www
 
 # Enable mod_rewrite, required for WordPress permalinks and .htaccess files
 a2enmod rewrite
-# phpenmod -v 5.6 mcrypt mbstring # PHP5
+# php5enmod mcrypt # PHP5 on Ubuntu 14.04 LTS
+# phpenmod -v 5.6 mcrypt mbstring # PHP5 on Ubuntu 17.04
 phpenmod -v 7.1 mcrypt mbstring # PHP7
 
 # Restart Apache
