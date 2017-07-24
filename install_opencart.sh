@@ -4,7 +4,7 @@
 # Email: hello@aamnah.com
 # Description: Bash script to install Opencart
 # Usage: You can use 'curl' to run this script directly from Github.
-# curl -L https://gist.githubusercontent.com/aamnah/93cb63fc15e708649084/raw | bash
+# curl -L https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_opencart.sh | bash
 
 # COLORS
 Cyan='\033[0;36m'         # Cyan
