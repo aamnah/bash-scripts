@@ -6,6 +6,12 @@
 # Usage: You can use 'curl' to run this script directly from Github.
 # curl -L https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_opencart.sh | bash
 
+# TODO
+# [ ] File and folder permissions for install https://gist.github.com/aamnah/9cab2942f42d5fe7035d
+# [ ] File and folder permissions post-install (secure) https://gist.github.com/aamnah/eff1c13f8b8d893c7c61
+# [ ] Create the config files from script instead of going to http://domain.com/install and entering them
+# [ ] Delete install folder when done
+
 # COLORS
 Cyan='\033[0;36m'         # Cyan
 Green='\033[0;32m'        # Green
