@@ -99,6 +99,22 @@ To run, simply do `bash install_nodejs.sh`. To run remotely:
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_nodejs.sh | bash
 ```
 
+### install_opencart.sh
+
+Installs any opencart version between 1.5.6 and 3.0.2.0 The script:
+
+- Asks for a specific version to install
+- Downloads and extracts the compressed files for that version from OpenCart's Github release archive
+- renames the `.htaccess` file
+
+To finish the installation, go to `/install` in your browser (http://yourdomain.com/install)
+
+To run, simply do `bash install_opencart.sh`. To run remotely:
+
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_opencart.sh | bash
+```
+
 ### install_todotxt.sh
 Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo application - in the default Dropbox folder on a Mac. Also configures the recommended [tweaks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks). 
 
