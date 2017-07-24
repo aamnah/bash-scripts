@@ -41,10 +41,10 @@ Color_Off='\033[0m'       # Text Reset
   if [[ $match = 1 ]]; then
     # Download files for that version from Github
     echo -e "${Cyan} Downloading files.. ${Color_Off}"
-    wget -O opencart-$VERSION.zip https://codeload.github.com/opencart/opencart/zip/$VERSION
+    wget -O opencart-$VERSION.zip https://github.com/opencart/opencart/archive/${VERSION}.tar.gz
 
     echo -e "${Cyan} Extracting.. ${Color_Off}"
-    tar zxvf opencart-$VERSION.zip
+    tar xzf opencart-$VERSION.zip
 
     echo -e "${Cyan} Cleaning up.. ${Color_Off}"
     mv opencart-$VERSION/* .
