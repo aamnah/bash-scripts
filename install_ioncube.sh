@@ -79,7 +79,7 @@ loadModule() {
 }
 
 testInstall() {
-	echo -p "\n ${Cyan}Testing install.. ${Color_Off}"
+	echo -e "\n ${Cyan}Testing install.. ${Color_Off}"
 	php -r "echo var_export(extension_loaded('ionCube Loader') ,true);"
 }
 
