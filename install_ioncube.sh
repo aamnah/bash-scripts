@@ -34,14 +34,13 @@ echo -e "\n${Cyan}ARCH: `arch`"
 echo -e "PHP_VERSION: ${PHP_VERSION}"
 echo -e "PHP_EXT_DIR: ${PHP_EXT_DIR}"
 echo -e "PHP_INI_DIR: ${PHP_INI_DIR}"
-echo -e "PHP_MODS_DIR: ${PHP_MODS_DIR}"
-echo -e "FILE_LINK: ${FILE_LINK} ${Color_Off}"
+echo -e "PHP_MODS_DIR: ${PHP_MODS_DIR} ${Color_Off}"
 
 getFiles() {
 	# Download and extract source files
 	echo -e "\n ${Cyan}Downloading and extracting files ${Color_Off}"
 
-	# download the files for the right architecture 32-bit or 64-bit
+	# download the files for the right architecture (32-bit or 64-bit)
 	if [ `arch` == "i686" ]; then
 		wget -O ioncube_loaders.tar.gz http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86.tar.gz
 	elif [ `arch` == "x86_64" ]; then
@@ -54,12 +53,6 @@ getFiles() {
 copyModule() {
 	# Copy ioncube loader to the PHP extensions directory
 	echo -e "\n ${Cyan}Copying module to PHP extensions directory ${Color_Off}"
-
-	# TODO
-	# check if file exists
-	# if not, show an error stating no module file for that version,
-	# you can manually copy the closest matching PHP version to this directory ${PHP_INI_DIR}
-	# exit
 
 	# check if module is provided
 	if [ ! -e ioncube/ioncube_loader_lin_${PHP_VERSION}.so ]; then
@@ -82,7 +75,7 @@ copyModule() {
 
 }
 
-loadModule() {
+createConfig() {
 	# load ionCube module by adding it to .ini files directory
 	echo -e "\n ${Cyan}Loading the module ${Color_Off}"
 
@@ -90,21 +83,26 @@ loadModule() {
 	touch ${PHP_MODS_DIR}/ioncube.ini
 	echo -e "zend_extension = \"${PHP_EXT_DIR}/ioncube_loader_lin_${PHP_VERSION}.so\"" > ${PHP_MODS_DIR}/ioncube.ini
 	
-	# TODO 
 	# check if a symbolic link already exists
-	# if [ condition ]; then
-	#   # do something
-	# else
-	#   # do something else
-	# fi
-	# create a link to that file from the additional .ini files directory
-	# ln -s target linkName
-	ln -s ${PHP_MODS_DIR}/ioncube.ini ${PHP_INI_DIR}/00-ioncube.ini # The 00 at the beginning of the filename ensures this file will be loaded before other PHP conf files.
+	if [ ! -L ${PHP_INI_DIR}/00-ioncube.ini ]; then # if link doesn't exist
+		# create a link to that file from the additional .ini files directory
+		# ln -s target linkName
+	  ln -s ${PHP_MODS_DIR}/ioncube.ini ${PHP_INI_DIR}/00-ioncube.ini # The 00 at the beginning of the filename ensures this file will be loaded before other PHP conf files
+	else # if link exists
+	  echo -e "\n ${Yellow}Symbolic link already exists! Skipping.. ${Color_Off}"
+	fi
 }
 
 testInstall() {
 	echo -e "\n ${Cyan}Testing install.. ${Color_Off}"
-	php -r "echo var_export(extension_loaded('ionCube Loader') ,true);"
+
+	if [ `php -r "echo var_export(extension_loaded('ionCube Loader') ,true);"` == "true" ]; then
+		echo -e "\n ${Cyan}ionCube installation OK ${Color_Off}"
+	else
+		echo -e "\n ${Yellow}ionCube installation FAILED ${Color_Off}"
+		echo -e "\n ${Red}EXIT ${Color_Off}"
+		exit 2
+	fi
 }
 
 cleanup() {
@@ -115,7 +113,7 @@ cleanup() {
 
 getFiles
 copyModule
-loadModule
+createConfig
 testInstall
 cleanup
 
@@ -126,5 +124,5 @@ echo -e "\n ${Green}SUCCESS ${Color_Off}"
 
 # ISSUES
 # - [ ] `php -i` gives directory paths for 'cli' instaed of 'apache2', /etc/php/7.2/cli/conf.d instead of /etc/php/7.2/apache2/conf.d
-# - [ ] `arch` gives 'i686' for 32-bit while the download link uses 'x86'
+# - [x] `arch` gives 'i686' for 32-bit while the download link uses 'x86'
 # - [ ] ionCube loader may not have provided the module for your PHP version, for example 7.2. In cases like this ${PHP_VERSION} will evaluate but wont find any relevant files
