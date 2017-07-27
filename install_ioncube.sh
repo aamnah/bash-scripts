@@ -18,9 +18,7 @@ Blue='\033[0;34m'         # Blue
 Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
 
-# install_ioncube.sh
-ARCH=`arch` # x86_64 means 64-bit, i686 means 32-bit.
-FILE_LINK="https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_${ARCH}.tar.gz"
+
 PHP_VERSION=`php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;"` # 7.2
 PHP_EXT_DIR=`php -i | grep extension_dir | cut -d ">" -f3 | cut -d " " -f2` # /usr/lib/php/20160731, using cut to get only the folder path from output
 # PHP_INI_DIR=`php -i | grep "Scan this dir for additional .ini files" | cut -d ">" -f2 | cut -d " " -f2` # /etc/php/7.2/cli/conf.d
@@ -32,22 +30,25 @@ PHP_MODS_DIR="/etc/php/${PHP_VERSION}/mods-available" # /etc/php/7.2/mods-availa
 # In that case, manually copy the module for the closest matching PHP version
 
 # TEST
+echo -e "\n${Cyan}ARCH: `arch`"
 echo -e "PHP_VERSION: ${PHP_VERSION}"
 echo -e "PHP_EXT_DIR: ${PHP_EXT_DIR}"
 echo -e "PHP_INI_DIR: ${PHP_INI_DIR}"
-echo -e "ARCH: ${ARCH}"
-echo -e "FILE_LINK: ${FILE_LINK}"
+echo -e "PHP_MODS_DIR: ${PHP_MODS_DIR}"
+echo -e "FILE_LINK: ${FILE_LINK} ${Color_Off}"
 
 getFiles() {
 	# Download and extract source files
 	echo -e "\n ${Cyan}Downloading and extracting files ${Color_Off}"
 
-	# TODO
-	# if `arch` === i686
-	# FILE_LINK="https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86.tar.gz"
-	# needed because the download link uses x86 instead of i686 for 32-bit 
-	wget -O ioncube_loaders.tar.gz ${FILE_LINK}
-	tar xzf ioncube_loaders.tar.gz
+	# download the files for the right architecture 32-bit or 64-bit
+	if [ `arch` == "i686" ]; then
+		wget -O ioncube_loaders.tar.gz http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86.tar.gz
+	elif [ `arch` == "x86_64" ]; then
+		wget -O ioncube_loaders.tar.gz http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz
+	fi
+
+	tar -xzf ioncube_loaders.zip
 }
 
 copyModule() {
@@ -65,7 +66,7 @@ copyModule() {
 		echo -e "\n ${Yellow}ionCube module doesn't exist for the PHP version (${PHP_VERSION}) installed on your system"
 		echo -e "\n You can manually copy the closest matching PHP version to this directory ${PHP_EXT_DIR} ${Color_Off}"
 		echo -e "\n ${Red}EXIT ${Color_Off}"
-		exit 1
+		# exit 1
 
 	# check if module is already in extensions directory
 	elif [ -e ${PHP_EXT_DIR}/ioncube_loader_lin_${PHP_VERSION}.so ]; then
