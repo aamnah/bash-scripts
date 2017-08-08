@@ -4,7 +4,6 @@
 sudo echo "
 # Webmin
 deb http://download.webmin.com/download/repository sarge contrib
-deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib
 " >> /etc/apt/sources.list
 
 # add Webmin GPG key to apt, so the source repo will be trusted
