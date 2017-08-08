@@ -9,8 +9,9 @@ deb http://download.webmin.com/download/repository sarge contrib
 # add Webmin GPG key to apt, so the source repo will be trusted
 wget -q http://www.webmin.com/jcameron-key.asc -O- | sudo apt-key add -
 
-sudo apt-get update
-sudo apt-get install webmin -y
+sudo apt update
+sudo apt install apt-transport-https -y
+sudo apt install webmin -y
 
 # Add UFW Firewall Rule for Webmin port
 # sudo ufw allow 10000/tcp
