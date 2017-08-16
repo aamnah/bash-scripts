@@ -12,7 +12,7 @@
 # Color Reset
 Color_Off='\033[0m'       # Reset
 
-# Regular Colorsm
+# Regular Colors
 Red='\033[0;31m'          # Red
 Green='\033[0;32m'        # Green
 Yellow='\033[0;33m'       # Yellow
@@ -20,15 +20,18 @@ Blue='\033[0;34m'         # Blue
 Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
 
-
-# Update system repos
-echo -e "\n ${Cyan} Updating package repositories.. ${Color_Off}"
-sudo apt -qq update 
-#sudo apt -qq install openssl -y # openssl is usually already installed on Ubuntu 16.04 LTS+ # Being used for generating a truly random password
-
-PASS_MYSQL_ROOT=`openssl rand -base64 12` # this you need to save
+# GENERATE PASSOWRDS
+# sudo apt -qq install openssl -y # openssl used for generating a truly random password
+PASS_MYSQL_ROOT=`openssl rand -base64 12` # this you need to save 
 PASS_PHPMYADMIN_APP=`openssl rand -base64 12` # can be random, won't be used again
 PASS_PHPMYADMIN_ROOT="${PASS_MYSQL_ROOT}" # Your MySQL root pass
+
+
+update() {
+	# Update system repos
+	echo -e "\n ${Cyan} Updating package repositories.. ${Color_Off}"
+	sudo apt -qq update 
+}
 
 installApache() {
 	# Apache
@@ -108,18 +111,17 @@ enableMods() {
 setPermissions() {
 	# Permissions
 	echo -e "\n ${Cyan} Setting Ownership for /var/www.. ${Color_Off}"
-
 	sudo chown -R www-data:www-data /var/www
 }
 
 restartApache() {
 	# Restart Apache
 	echo -e "\n ${Cyan} Restarting Apache.. ${Color_Off}"
-
-sudo service apache2 restart
+	sudo service apache2 restart
 }
 
 # RUN
+update
 installApache
 installPHP
 installMySQL
@@ -130,6 +132,10 @@ setPermissions
 restartApache
 
 echo -e "\n${Green} SUCCESS! MySQL password is: ${PASS_MYSQL_ROOT} ${Color_Off}"
+
+# TODO
+# - [x] Figure out why it is asking for MySQL password and not just taking it from the variable
+# - [ ] Figure out a secure way for entering MySQL password (where it isn't entered on command prompt and saved in bash history as a result)
 
 # LINKS
 # https://www.howtogeek.com/howto/30184/10-ways-to-generate-a-random-password-from-the-command-line/
