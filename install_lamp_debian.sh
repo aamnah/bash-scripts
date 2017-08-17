@@ -21,7 +21,7 @@ Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
 
 # GENERATE PASSOWRDS
-# sudo apt -qq install openssl -y # openssl used for generating a truly random password
+# sudo apt -qy install openssl # openssl used for generating a truly random password
 PASS_MYSQL_ROOT=`openssl rand -base64 12` # this you need to save 
 PASS_PHPMYADMIN_APP=`openssl rand -base64 12` # can be random, won't be used again
 PASS_PHPMYADMIN_ROOT="${PASS_MYSQL_ROOT}" # Your MySQL root pass
@@ -36,7 +36,7 @@ update() {
 installApache() {
 	# Apache
 	echo -e "\n ${Cyan} Installing Apache.. ${Color_Off}"
-	sudo apt -qq -y install apache2 apache2-doc apache2-utils libexpat1 ssl-cert
+	sudo apt -qy install apache2 apache2-doc apache2-utils libexpat1 ssl-cert
 	# check Apache configuration: apachectl configtest
 }
 
@@ -55,7 +55,7 @@ installPHP() {
 	# apt install php5.6 libapache2-mod-php5.6 php5.6-cli php5.6-common php-curl php5.6-curl php5.6-dev php5.6-gd php5.6-intl php5.6-mcrypt php5.6-mbstring php5.6-mysql php5.6-recode php5.6-xml php5.6-pspell php5.6-ps php5.6-imagick php-pear php-gettext -y
 
 	# PHP7 (latest)
-	sudo apt -qq -y install php php-common libapache2-mod-php php-curl php-dev php-gd php-gettext php-imagick php-intl php-mbstring php-mcrypt php-mysql php-pear php-pspell php-recode php-xml
+	sudo apt -qy install php php-common libapache2-mod-php php-curl php-dev php-gd php-gettext php-imagick php-intl php-mbstring php-mcrypt php-mysql php-pear php-pspell php-recode php-xml
 }
 
 installMySQL() {
@@ -67,7 +67,7 @@ installMySQL() {
 	sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password ${PASS_MYSQL_ROOT}" # repeat password for the MySQL root user
 	
 	# DEBIAN_FRONTEND=noninteractive # by setting this to non-interactive, no questions will be asked
-	DEBIAN_FRONTEND=noninteractive sudo apt -qq -y install mysql-server mysql-client
+	DEBIAN_FRONTEND=noninteractive sudo apt -qy install mysql-server mysql-client
 }
 
 secureMySQL() {
@@ -94,7 +94,7 @@ installPHPMyAdmin() {
 	sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/admin-pass password ${PASS_MYSQL_ROOT}" # MySQL Root Password
 	sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/internal/skip-preseed boolean true"
 
-	DEBIAN_FRONTEND=noninteractive sudo apt -qq -y install phpmyadmin
+	DEBIAN_FRONTEND=noninteractive sudo apt -qy install phpmyadmin
 }
 
 
