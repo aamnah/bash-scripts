@@ -136,6 +136,7 @@ echo -e "\n${Green} SUCCESS! MySQL password is: ${PASS_MYSQL_ROOT} ${Color_Off}"
 # TODO
 # - [x] Figure out why it is asking for MySQL password and not just taking it from the variable in heredoc (cz: to avoid redirection, programs don't let heredoc enter passwords)
 # - [ ] Figure out a secure way for entering MySQL password (where it isn't entered on command prompt and saved in bash history as a result)
+# - [ ] Email password (or add it to MOTD)
 
 # LINKS
 # https://www.howtogeek.com/howto/30184/10-ways-to-generate-a-random-password-from-the-command-line/
