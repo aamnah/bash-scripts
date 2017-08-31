@@ -104,7 +104,7 @@ installOpenCart() {
 }
 
 # Ask for version
-echo -e "${Cyan} What version should i install? (for example: ${BCyan}1.5.6.4${Cyan} or ${BCyan}3.0.2.0${Cyan})${Color_Off}"
+echo -ne "${Cyan} What version should i install? (for example: ${BCyan}1.5.6.4${Cyan} or ${BCyan}3.0.2.0${Cyan})${Color_Off}"
 read VERSION
 
 checkVersion
@@ -118,7 +118,7 @@ if [[ $match = 1 ]]; then
 	installOpenCart
 fi
 
-echo -e "${Cyan}Do you want to secure the installation? (yes/no) ${Color_Off} \n (You should only secure the installation after you are done with the installation process)"
+echo -ne "${Cyan}Do you want to secure the installation? (yes/no) ${Color_Off} \n (You should only secure the installation after you are done with the installation process)"
 read SECURE
 
 if [ "${SECURE}" = "yes" ]; then
