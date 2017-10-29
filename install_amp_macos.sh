@@ -40,6 +40,18 @@
 # - http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc8
 
 
+# Color Reset
+Color_Off='\033[0m'       # Reset
+
+# Regular Colors
+Red='\033[0;31m'          # Red
+Green='\033[0;32m'        # Green
+Yellow='\033[0;33m'       # Yellow
+Blue='\033[0;34m'         # Blue
+Purple='\033[0;35m'       # Purple
+Cyan='\033[0;36m'         # Cyan
+
+# SCRIPT VARIABLES
 SITES_FOLDER="/Users/$(whoami)/Sites"
 BREW_APACHE_CONF_FILE="/usr/local/etc/httpd/httpd.conf"
 BREW_VHOSTS_CONF_FILE="/usr/local/etc/httpd/extra/httpd-vhosts.conf"
@@ -51,14 +63,15 @@ install_Homebrew() {
 # Check if Homebrew is installed, install if we don't have it, update if we do
 
 	if [[ $(command -v brew) == "" ]]; then 
-		echo "Installing Homebrew.. "
+		echo -e "\n ${Cyan} Installing Homebrew .. ${Color_Off}"
 		/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	else
-		echo "Updating Homebrew.. "
+		echo -e "\n ${Cyan} Updating Homebrew, this may take a while .. ${Color_Off}"
 		brew update
+		echo -e "\n ${Cyan} Running brew doctor .. ${Color_Off}"
 		brew doctor
 		
-		echo "Adding Homebrew Tap for PHP.. "
+		echo -e "\n ${Cyan} Adding Homebrew Tap for PHP .. ${Color_Off}"
 		brew tap homebrew/php
 		brew update
 	fi
@@ -69,38 +82,40 @@ install_XCode() {
 # Check if XCode is installed, install if we don't have it
 
 	if [[ $(command -v xcode-select) == "" ]]; then 
-		echo "Installing XCode.. "
+		echo -e "\n ${Cyan} Installing XCode .. ${Color_Off}"
 		xcode-select --install
 	fi
 }
 
 
 create_SitesFolder() {
-# Create ~/Sites folder if it doesn't already exists
+# Create ~/Sites folder if it doesn't already exist + add a demo index.html
 
 	if [ -d ${SITES_FOLDER} ]; then
-		echo -e "${SITES_FOLDER} directory already exists, skipping.."
+		echo -e "\n ${Yellow} ${SITES_FOLDER} directory already exists, skipping .. ${Color_Off}"
 	else
-		echo -e "Creating ${SITES_FOLDER} directory"
+		echo -e "\n ${Cyan} Creating ${SITES_FOLDER} directory .. ${Color_Off}"
 		mkdir ${SITES_FOLDER}
 		echo -e "<h1>Apache works!</h1> \n <p>Hello from <strong>${SITES_FOLDER}</strong></p>" > ${SITES_FOLDER}/index.html
 	fi
 }
 
+####################### TESTED TILL HERE #######################
+
 
 install_Apache() {
 # Install Apache and set it to auto-start on boot
 
-	echo "Stopping built-in Apache.. "
+	echo -e "\n ${Cyan} Stopping built-in Apache .. ${Color_Off}"
 	sudo apachectl stop
 
-	echo "Removing any auto-loading scripts.. "
+	echo -e "\n ${Cyan} Removing any auto-loading scripts .. ${Color_Off}"
 	sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
 
-	echo "Installing Apache via Homebrew"
+	echo -e "\n ${Cyan} Installing Apache via Homebrew .. ${Color_Off}"
 	brew install httpd
 
-	echo "Auto start the new Apache server"
+	echo -e "\n ${Cyan} Auto start the new Apache server .. ${Color_Off}"
 	sudo brew services start httpd
 	
 	# TROUBLESHOOTING
