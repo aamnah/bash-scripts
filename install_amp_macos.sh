@@ -6,7 +6,8 @@
 # LINK: http://aamnah.com
 # DESCRIPTION: Install Apache, MySQL and PHP on macOS High Sierra
 # VERSION: 0.5
-# REFERENCE: https://getgrav.org/blog/macos-sierra-apache-multiple-php-versions
+# REFERENCE 1: https://getgrav.org/blog/macos-sierra-apache-multiple-php-versions
+# REFERENCE 2: https://praxent.com/blog/native-lamp-stack-mac-os-x
 #
 ###############################################################################
 
@@ -39,7 +40,7 @@
 # - http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc8
 
 
-SITES_FOLDER="/Users/${whoami}/Sites"
+SITES_FOLDER="/Users/$(whoami)/Sites"
 BREW_APACHE_CONF_FILE="/usr/local/etc/httpd/httpd.conf"
 BREW_VHOSTS_CONF_FILE="/usr/local/etc/httpd/extra/httpd-vhosts.conf"
 BREW_PHP_CONF_FILE="/usr/local/etc/php/7.0/php.ini" # for v7.0
@@ -75,13 +76,14 @@ install_XCode() {
 
 
 create_SitesFolder() {
-# See if ~/Sites folder exists, create if non-existent
+# Create ~/Sites folder if it doesn't already exists
 
-	if [ -d ~/Sites ]; then
-		echo "Sites folder already exists, skipping.."
+	if [ -d ${SITES_FOLDER} ]; then
+		echo -e "${SITES_FOLDER} directory already exists, skipping.."
 	else
-		mkdir ~/Sites
-		echo "<h1>My User Web Root</h1>" > ~/Sites/index.html
+		echo -e "Creating ${SITES_FOLDER} directory"
+		mkdir ${SITES_FOLDER}
+		echo -e "<h1>Apache works!</h1> \n <p>Hello from <strong>${SITES_FOLDER}</strong></p>" > ${SITES_FOLDER}/index.html
 	fi
 }
 
@@ -103,6 +105,7 @@ install_Apache() {
 	
 	# TROUBLESHOOTING
 	# sudo apachectl configtest
+	# sudo apachectl -S  
 	# sudo apachectl start
 	# sudo apachectl stop
 	# sudo apachectl -k restart
