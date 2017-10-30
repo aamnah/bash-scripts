@@ -5,7 +5,7 @@
 # AUTHOR: Aamnah
 # LINK: http://aamnah.com
 # DESCRIPTION: Install Apache, MySQL and PHP on macOS High Sierra
-# VERSION: 0.6
+# VERSION: 0.5
 # REFERENCE 1: https://getgrav.org/blog/macos-sierra-apache-multiple-php-versions
 # REFERENCE 2: https://praxent.com/blog/native-lamp-stack-mac-os-x
 #
@@ -13,7 +13,7 @@
 
 # This script
 # - Installs Homebrew if not installed
-# - Installs XCode if not installed
+# - Installs XCode Command Line Tools if not installed
 # - Installs Apache with Homebrew
 # - Creates ~/Sites directory if not exists
 # - Confgiures Apache conf file using sed
@@ -34,7 +34,7 @@
 #       https://gist.github.com/vitorbritto/4fea3514fa09ef298b1f
 # - [ ] If not using Include, append our changes to the end of the file instead of editing settings in place. The later ones will override the ones that came before
 # - [ ] Move conf files to the Sites folder for easy access
-# - [ ] Add logs folder inside Sites directory
+# - [x] Add logs folder inside Sites directory
 
 # LINKS
 # - [1]: http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc8
