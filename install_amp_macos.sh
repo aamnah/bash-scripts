@@ -5,7 +5,7 @@
 # AUTHOR: Aamnah
 # LINK: http://aamnah.com
 # DESCRIPTION: Install Apache, MySQL and PHP on macOS High Sierra
-# VERSION: 0.5
+# VERSION: 0.7
 # REFERENCE 1: https://getgrav.org/blog/macos-sierra-apache-multiple-php-versions
 # REFERENCE 2: https://praxent.com/blog/native-lamp-stack-mac-os-x
 #
@@ -26,7 +26,7 @@
 
 
 # TODO
-# - [ ] Test the script 
+# - [x] Test the script 
 # - [ ] Make a copy of conf files before editing them
 # - [ ] Try the Include directive to include a new file with your settings instead of directly editing the main conf files - 
 #       e.g. `Include /Users/aamnah/Sites/*.conf` - will include all .conf files in the Site folders in the main httpd.conf
@@ -35,6 +35,7 @@
 # - [ ] If not using Include, append our changes to the end of the file instead of editing settings in place. The later ones will override the ones that came before
 # - [ ] Move conf files to the Sites folder for easy access
 # - [x] Add logs folder inside Sites directory
+# - [x] Check if brew packages are already installed (httpd, php70, mariadb, sequel-pro, dnsmasq)
 
 # LINKS
 # - [1]: http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html#toc8
@@ -64,7 +65,7 @@ BREW_DNSMASQ_CONF_FILE="/usr/local/etc/dnsmasq.conf"
 
 
 install_Homebrew() {
-# Check if Homebrew is installed, install if we don't have it, update if we do
+# Check if Homebrew is installed, install if we don't have it, update if we do. Also run brew doctor
 
 	if [[ $(command -v brew) == "" ]]; then 
 		echo -e "\n ${Cyan} Installing Homebrew .. ${Color_Off}"
@@ -124,11 +125,15 @@ install_Apache() {
 	echo -e "\n ${Cyan} Removing any auto-loading scripts for built-in Apache .. ${Color_Off}"
 	sudo launchctl unload -w /System/Library/LaunchDaemons/org.apache.httpd.plist 2>/dev/null
 
-	echo -e "\n ${Cyan} Installing Apache via Homebrew .. ${Color_Off}"
-	brew install httpd
+	if [[ $(brew list | grep httpd) == "httpd" ]]; then
+		echo -e "\n ${Blue} Apache is already installed, configuring ..  ${Color_Off}"
+	else
+		echo -e "\n ${Cyan} Installing Apache with Homebrew .. ${Color_Off}"
+		brew install httpd
 
-	echo -e "\n ${Cyan} Auto start the new Apache server .. ${Color_Off}"
-	sudo brew services start httpd
+		echo -e "\n ${Cyan} Auto start the new Apache server .. ${Color_Off}"
+		sudo brew services start httpd		
+	fi 
 	
 	# TROUBLESHOOTING
 	# sudo apachectl configtest
@@ -171,11 +176,22 @@ configure_Apache() {
 	echo -e "\n ${Cyan} Setting ServerName .. ${Color_Off}"
 	sed -i '' "s|	#ServerName www.example.com:8080|ServerName localhost|" ${BREW_APACHE_CONF_FILE}
 
-	echo -e "\n ${Cyan} Running a configuration check .. ${Color_Off}"
+	# Load index.php files
+echo -e "
+<IfModule dir_module>
+    DirectoryIndex index.php index.html
+</IfModule>
+
+<FilesMatch \.php$>
+    SetHandler application/x-httpd-php
+</FilesMatch>" >> ${BREW_APACHE_CONF_FILE}
+
+	# Verify configuration 
+	echo -e "\n ${Cyan} Verifying configuration .. ${Color_Off}"
 	sudo apachectl configtest
 
 	# Restart Apache so the configurtaion takes effect
-	echo -e "\n ${Cyan} Restarting Apache"
+	echo -e "\n ${Cyan} Restarting Apache ${Color_Off}"
 	sudo apachectl -k restart # The -k will force a restart immediately
 }
 
@@ -214,7 +230,7 @@ configure_VirtualHosts() {
 # Include /Users/$(whoami)/Sites/httpd-vhosts.conf" >> ${BREW_APACHE_CONF_FILE}
 
 	# Verify config
-	echo -e "\n ${Cyan} Verifying Virtual Hosts .. ${Color_Off}"
+	echo -e "\n ${Cyan} Verifying Virtual Hosts configuration .. ${Color_Off}"
 	apachectl -S
 	
 	# Restart Apache so the configurtaion takes effect
@@ -226,18 +242,20 @@ configure_VirtualHosts() {
 install_PHP() {
 # Install PHP 7.0
 	
-	echo -e "\n ${Cyan} Adding Homebrew Tap for PHP .. ${Color_Off}"
-	brew tap homebrew/php
-	brew update
+	if [[ $(brew list | grep php70) == "php70" ]]; then
+		echo -e "\n ${Blue} PHP 7.0 already installed, skipping .. ${Color_Off}"
+	else
+		echo -e "\n ${Cyan} Adding Homebrew Tap for PHP .. ${Color_Off}"
+		brew tap homebrew/php
+		brew update
 
-	echo -e "\n ${Cyan} Installing PHP 7.0 .. ${Color_Off}"
-	brew install php70 --with-httpd 
+		echo -e "\n ${Cyan} Installing PHP 7.0 .. ${Color_Off}"
+		brew install php70 --with-httpd 
+	fi
 
 	# You must reinstall each PHP version with reinstall command rather than install 
 	# if you have previously installed PHP through Brew
 }
-
-####################### TESTED TILL HERE #######################
 
 
 configure_PHP() { 
@@ -249,21 +267,30 @@ configure_PHP() {
 	sed -i '' "s|LoadModule php7_module        /usr/local/Cellar/php70/7.0.24_16/libexec/apache2/libphp7.so|LoadModule php7_module    /usr/local/opt/php70/libexec/apache2/libphp7.so|" ${BREW_PHP_CONF_FILE}
 	
 	# Validate install
-	echo "<?php phpinfo();" > ~/Sites/info.php
+	echo "<?php phpinfo(); phpinfo(INFO_MODULES);" > ${SITES_DIR}/info.php
 	echo "Test PHP at: http://localhost/info.php"
+
+	# Restart Apache so the configurtaion takes effect
+	echo -e "\n ${Cyan} Restarting Apache .. ${Color_Off}"
+	sudo apachectl -k restart # The -k will force a restart immediately
 }
 
 
-install_MariaDB() { # TESTED
+install_MariaDB() {
 # Install MariaDB as a drop-in replacement for MySQL as it is easily installed and updated with Brew
-	echo -e "\n ${Cyan} Updating Homebrew .. ${Color_Off}"
-	brew update
 	
-	echo -e "\n ${Cyan} Installing MariaDB .. ${Color_Off}"
-	brew install mariadb
-	
-	echo -e "\n ${Cyan} Setting MariaDB to Auto-start on boot .. ${Color_Off}"
-	brew services start mariadb
+	if [[ $(brew list | grep mariadb) == "mariadb" ]]; then
+		echo -e "\n ${Blue} MariaDB is already installed, skipping .. ${Color_Off}"
+	else
+		echo -e "\n ${Cyan} Updating Homebrew .. ${Color_Off}"
+		brew update
+		
+		echo -e "\n ${Cyan} Installing MariaDB .. ${Color_Off}"
+		brew install mariadb
+		
+		echo -e "\n ${Cyan} Setting MariaDB to Auto-start on boot .. ${Color_Off}"
+		brew services start mariadb	
+	fi
 
 	# /usr/local/bin/mysql_secure_installation
 
@@ -271,24 +298,34 @@ install_MariaDB() { # TESTED
 }
 
 
-install_SequelPro() { # TESTED
+install_SequelPro() { 
 # Install Sequel Pro with Homebrew Cask
 
-	# make sure Homebrew Cask is available
-	brew tap caskroom/cask
+	if [[ $(brew cask list | grep sequel-pro) == "sequel-pro" ]]; then
+		echo -e "\n ${Blue} Sequel Pro is already installed, skipping .. ${Color_Off}"
+	else
+		echo -e "\n ${Cyan} Installing Sequel Pro .. ${Color_Off}"
+		# make sure Homebrew Cask is available
+		brew tap caskroom/cask
 
-	# install Sequel Pro
-	echo -e "\n ${Cyan} Installing Sequel Pro .. ${Color_Off}"
-	brew cask install sequel-pro
+		# install Sequel Pro
+		brew cask install sequel-pro
+	fi
 
 	# You should be able to use Sequel Pro to connect to MariaDB via the Socket option using user 'root'
 	# mysql -u root
 }
 
-install_Dnsmasq() { # TESTED
+install_Dnsmasq() { 
 # install and configure Dnsmasq to automatically handle wildcard *.dev names and forward all of them to localhost (127.0.0.1)
-	brew install dnsmasq
-	
+
+	if [[ $(brew list | grep dnsmasq) == "dnsmasq" ]]; then
+		echo -e "\n ${Blue} Dnsmasq is already installed, configuring .. ${Color_Off}"
+	else
+		echo -e "${Cyan} Installing Dnsmasq .. ${Color_Off}"
+		brew install dnsmasq
+	fi
+
 	echo -e "\n ${Cyan} Setting up *.dev hosts .. ${Color_Off}"
 	echo 'address=/.dev/127.0.0.1' > ${BREW_DNSMASQ_CONF_FILE} 
 	
@@ -317,3 +354,6 @@ configure_PHP
 install_MariaDB
 install_SequelPro
 install_Dnsmasq
+
+
+echo -e "\n\n  ${Green} ALL DONE! ${Color_Off}"
