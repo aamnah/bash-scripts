@@ -176,16 +176,6 @@ configure_Apache() {
 	echo -e "\n ${Cyan} Setting ServerName .. ${Color_Off}"
 	sed -i '' "s|	#ServerName www.example.com:8080|ServerName localhost|" ${BREW_APACHE_CONF_FILE}
 
-	# Load index.php files
-echo -e "
-<IfModule dir_module>
-    DirectoryIndex index.php index.html
-</IfModule>
-
-<FilesMatch \.php$>
-    SetHandler application/x-httpd-php
-</FilesMatch>" >> ${BREW_APACHE_CONF_FILE}
-
 	# Verify configuration 
 	echo -e "\n ${Cyan} Verifying configuration .. ${Color_Off}"
 	sudo apachectl configtest
@@ -265,6 +255,16 @@ configure_PHP() {
 	
 	# replace specific version paths with some more generic paths
 	sed -i '' "s|LoadModule php7_module        /usr/local/Cellar/php70/7.0.24_16/libexec/apache2/libphp7.so|LoadModule php7_module    /usr/local/opt/php70/libexec/apache2/libphp7.so|" ${BREW_PHP_CONF_FILE}
+
+	# Load index.php files
+echo -e "
+<IfModule dir_module>
+    DirectoryIndex index.php index.html
+</IfModule>
+
+<FilesMatch \.php$>
+    SetHandler application/x-httpd-php
+</FilesMatch>" >> ${BREW_APACHE_CONF_FILE}
 	
 	# Validate install
 	echo "<?php phpinfo(); phpinfo(INFO_MODULES);" > ${SITES_DIR}/info.php
