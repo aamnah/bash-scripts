@@ -5,7 +5,7 @@
 # AUTHOR: Aamnah
 # LINK: http://aamnah.com
 # DESCRIPTION: Install Apache, MySQL and PHP on macOS High Sierra
-# VERSION: 0.7
+# VERSION: 0.8
 # REFERENCE 1: https://getgrav.org/blog/macos-sierra-apache-multiple-php-versions
 # REFERENCE 2: https://praxent.com/blog/native-lamp-stack-mac-os-x
 #
@@ -19,6 +19,7 @@
 # - Confgiures Apache conf file using sed
 # - Confgiures Apache Virtual Hosts
 # - Installs PHP with Homebrew
+# - Installs common PHP Extensions (e.g. mcrypt required by OpenCart)
 # - Confgiures PHP conf file using sed
 # - Installs MariaDB with Homebrew
 # - Installs Sequel-Pro with Homebrew Cask
@@ -247,6 +248,13 @@ install_PHP() {
 	# if you have previously installed PHP through Brew
 }
 
+install_PHP_Modules() {
+	echo -e "\n ${Cyan} Installing mcrypt extension for PHP 7.0 (required by OpenCart) .. ${Color_Off}"
+	brew install mcrypt php70-mcrypt
+
+	# Apache will be restarted in the next step: configure_PHP()
+}
+
 
 configure_PHP() { 
 # Configure PHP to load modules from generic paths and validate install with phpinfo()
@@ -350,6 +358,7 @@ install_Apache
 configure_Apache
 configure_VirtualHosts
 install_PHP
+install_PHP_Modules
 configure_PHP
 install_MariaDB
 install_SequelPro
