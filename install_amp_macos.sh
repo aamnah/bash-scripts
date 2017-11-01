@@ -175,7 +175,7 @@ configure_Apache() {
 	
 	# ServerName
 	echo -e "\n ${Cyan} Setting ServerName .. ${Color_Off}"
-	sed -i '' "s|	#ServerName www.example.com:8080|ServerName localhost|" ${BREW_APACHE_CONF_FILE}
+	sed -i '' "s|#ServerName www.example.com:8080|ServerName localhost|" ${BREW_APACHE_CONF_FILE}
 
 	# Verify configuration 
 	echo -e "\n ${Cyan} Verifying configuration .. ${Color_Off}"
