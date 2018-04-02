@@ -91,6 +91,8 @@ DELETE FROM mysql.user WHERE User='';
 DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
 FLUSH PRIVILEGES;
 EOFMYSQLSECURE
+
+# NOTE: Skipped validate_password because it'll cause issues with the generated password in this script
 }
 
 installPHPMyAdmin() {
