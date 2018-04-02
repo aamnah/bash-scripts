@@ -40,6 +40,17 @@ installApache() {
 	# check Apache configuration: apachectl configtest
 }
 
+installLetsEncryptCertbot() {
+  # Let's Encrypt SSL 
+  echo -e "\n ${Cyan} Let's Encrypt SSL.. ${Color_Off}"
+
+  apt update # update repo sources
+  apt install software-properties-common -y # required in order to add a repo
+  add-apt-repository ppa:certbot/certbot -y # add Certbot repo
+  apt update # update repo sources
+  apt install python-certbot-apache -y # install Certbot
+}
+
 
 installPHP() {
 	# PHP and Modules
@@ -123,6 +134,7 @@ restartApache() {
 # RUN
 update
 installApache
+installLetsEncryptCertbot
 installPHP
 installMySQL
 secureMySQL
