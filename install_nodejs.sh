@@ -19,15 +19,15 @@ echo -e "Current Node version is ${Color_Cyan}${nodeVersion}${Color_Off}"
 # remove existing
 echo -e "
 ${Color_Cyan}Removing Node-RED.. ${Color_Off}"
-sudo apt-get remove nodered -y
+sudo apt remove -y nodered
 
 echo -e "
 ${Color_Cyan}Removing Node.js... ${Color_Off}"
-sudo apt-get remove nodejs nodejs-legacy -y
+sudo apt remove -y nodejs nodejs-legacy
 
 echo -e "
 ${Color_Cyan}Removing npm... ${Color_Off}"
-sudo apt-get remove npm -y 
+sudo apt remove -y npm
 
 # install latest
 echo -e "
@@ -42,7 +42,7 @@ sudo dpkg -i node_latest_armhf.deb
 echo -e "
 ${Color_Cyan}Cleaning up .. ${Color_Off}"
 rm -rf /tmp/node_latest_armhf.deb
-sudo apt-get autoremove -y
+sudo apt autoremove -y
 
 # confirm version
 echo -e "
