@@ -36,7 +36,7 @@ update() {
 installApache() {
 	# Apache
 	echo -e "\n ${Cyan} Installing Apache.. ${Color_Off}"
-	sudo apt -qy install apache2 apache2-doc apache2-utils libexpat1 ssl-cert
+	sudo apt -qy install apache2 apache2-doc libexpat1 ssl-cert
 	# check Apache configuration: apachectl configtest
 }
 
