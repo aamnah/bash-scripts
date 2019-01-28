@@ -66,7 +66,7 @@ installPHP() {
 	# apt install php5.6 libapache2-mod-php5.6 php5.6-cli php5.6-common php-curl php5.6-curl php5.6-dev php5.6-gd php5.6-intl php5.6-mcrypt php5.6-mbstring php5.6-mysql php5.6-recode php5.6-xml php5.6-pspell php5.6-ps php5.6-imagick php-pear php-gettext -y
 
 	# PHP7 (latest)
-	sudo apt -qy install php php-common libapache2-mod-php php-curl php-dev php-gd php-gettext php-imagick php-intl php-mbstring mcrypt php-mysql php-pear php-pspell php-recode php-xml php-zip
+	sudo apt -qy install php php-common libapache2-mod-php php-curl php-dev php-gd php-gettext php-imagick php-intl php-mbstring php-mysql php-pear php-pspell php-recode php-xml php-zip
 }
 
 installMySQL() {
@@ -118,7 +118,7 @@ enableMods() {
 	sudo a2enmod rewrite
 	# php5enmod mcrypt # PHP5 on Ubuntu 14.04 LTS
 	# phpenmod -v 5.6 mcrypt mbstring # PHP5 on Ubuntu 17.04
-	sudo phpenmod mcrypt mbstring # PHP7
+	sudo phpenmod mbstring # PHP7
 }
 
 setPermissions() {
