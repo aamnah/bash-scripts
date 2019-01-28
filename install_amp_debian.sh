@@ -44,11 +44,11 @@ installLetsEncryptCertbot() {
   # Let's Encrypt SSL 
   echo -e "\n ${Cyan} Installing Let's Encrypt SSL.. ${Color_Off}"
 
-  apt update # update repo sources
-  apt install software-properties-common -y # required in order to add a repo
-  add-apt-repository ppa:certbot/certbot -y # add Certbot repo
-  apt update # update repo sources
-  apt install python-certbot-apache -y # install Certbot
+  sudo apt update # update repo sources
+  sudo apt install -y software-properties-common # required in order to add a repo
+  sudo add-apt-repository ppa:certbot/certbot -y # add Certbot repo
+  sudo apt update # update repo sources
+  sudo apt install -y python-certbot-apache # install Certbot
 }
 
 
@@ -118,7 +118,7 @@ enableMods() {
 	sudo a2enmod rewrite
 	# php5enmod mcrypt # PHP5 on Ubuntu 14.04 LTS
 	# phpenmod -v 5.6 mcrypt mbstring # PHP5 on Ubuntu 17.04
-	phpenmod mcrypt mbstring # PHP7
+	sudo phpenmod mcrypt mbstring # PHP7
 }
 
 setPermissions() {
