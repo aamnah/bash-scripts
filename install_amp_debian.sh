@@ -118,7 +118,7 @@ enableMods() {
 	sudo a2enmod rewrite
 	# php5enmod mcrypt # PHP5 on Ubuntu 14.04 LTS
 	# phpenmod -v 5.6 mcrypt mbstring # PHP5 on Ubuntu 17.04
-	phpenmod -v 7.1 mcrypt mbstring # PHP7
+	phpenmod mcrypt mbstring # PHP7
 }
 
 setPermissions() {
