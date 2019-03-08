@@ -13,26 +13,29 @@
 # 2. setup SSH keys for password-less access
 
 DATE=`date '+%Y %b %d _ %H:%M'`
-LOGFILE='${HOME}/rsync_log.txt'
-REMOTE_HOST='123.456.789.123'
+LOGFILE="${HOME}/rsync_log.txt"
+#REMOTE_HOST='123.123.123.123' # server 1
+REMOTE_HOST='456.456.456.456' # se=rver 2
 REMOTE_USER='root'
+REMOTE_PORT='2200'
 
 # Create log file
 touch ${LOGFILE}
 
-echo -e "START Copying MySQL dir - ${DATE}
+echo -e "
+START Copying MySQL dir - ${DATE}
 --------------------------------------------- 
-\n" >> ${LOGFILE}
+" >> ${LOGFILE}
 
 # Sync MySQL databases (with users and permissions)
-rsync -vPhaze "ssh -i /root/.ssh/id_rsa" ${REMOTE_USER}@${REMOTE_HOST}:/var/lib/mysql/ /var/lib/mysql/ &>>  ${LOGFILE}
+rsync -vPhaze "ssh -i /root/.ssh/id_rsa -p ${REMOTE_PORT}" ${REMOTE_USER}@${REMOTE_HOST}:/var/lib/mysql/ /var/lib/mysql/ &>>  ${LOGFILE}
 
-echo -e "\n
+echo -e "
 ---------------------------------------------
 END Copying MySQL dir - ${DATE}
-\n" >> ${LOGFILE}
+\n\n" >> ${LOGFILE}
 
 # NOTES
-# `&>>` redirects both stdout and stderr
+# `&>>` redirects both stdout and stderr 
 # run this with Cron so that it keeps running without you sitting at the Terminal
 # you can check progress with `tail -f logfilename.txt`
