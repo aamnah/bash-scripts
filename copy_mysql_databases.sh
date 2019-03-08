@@ -12,7 +12,6 @@
 # 1. install mysql-server
 # 2. setup SSH keys for password-less access
 
-DATE=`date '+%Y %b %d _ %H:%M'`
 LOGFILE="${HOME}/rsync_log.txt"
 #REMOTE_HOST='123.123.123.123' # server 1
 REMOTE_HOST='456.456.456.456' # server 2
@@ -23,7 +22,7 @@ REMOTE_PORT='2200'
 touch ${LOGFILE}
 
 echo -e "
-START Copying MySQL dir - ${DATE}
+START Copying MySQL dir -  $(date '+%Y %b %d _ %H:%M')
 --------------------------------------------- 
 " >> ${LOGFILE}
 
@@ -32,7 +31,7 @@ rsync -vPhaze "ssh -i /root/.ssh/id_rsa -p ${REMOTE_PORT}" ${REMOTE_USER}@${REMO
 
 echo -e "
 ---------------------------------------------
-END Copying MySQL dir - ${DATE}
+END Copying MySQL dir -  $(date '+%Y %b %d _ %H:%M')
 \n\n" >> ${LOGFILE}
 
 # NOTES
