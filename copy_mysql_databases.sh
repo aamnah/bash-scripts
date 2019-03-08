@@ -27,14 +27,14 @@ touch ${LOGFILE}
 
 echo -e "
 START Copying MySQL dir - $(date '+%Y %b %d _ %H:%M:%S')
---------------------------------------------- 
+--------------------------------------------->> 
 " >> ${LOGFILE}
 
 # Sync MySQL databases (with users and permissions)
 rsync -vPhaze "ssh -i ${SSH_KEY} -p ${REMOTE_PORT}" ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH} ${LOCAL_PATH} &>> ${LOGFILE}
 
 echo -e "
----------------------------------------------
+<<---------------------------------------------
 END Copying MySQL dir -  $(date '+%Y %b %d _ %H:%M:%S')
 \n\n" >> ${LOGFILE}
 
