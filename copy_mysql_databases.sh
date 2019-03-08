@@ -12,7 +12,7 @@
 # 1. install mysql-server
 # 2. setup SSH keys for password-less access
 
-LOGFILE="${HOME}/rsync_log.txt"
+LOGFILE="${HOME}/log_copy_mysql_$(date '+%Y%b%d_%H%M%S').txt"
 #REMOTE_HOST='123.123.123.123' # server 1
 REMOTE_HOST='456.456.456.456' # server 2
 REMOTE_USER='root'
