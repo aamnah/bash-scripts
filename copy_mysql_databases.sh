@@ -22,7 +22,7 @@ REMOTE_PORT='2200'
 touch ${LOGFILE}
 
 echo -e "
-START Copying MySQL dir -  $(date '+%Y %b %d _ %H:%M')
+START Copying MySQL dir -  $(date '+%Y %b %d _ %H:%M:%S')
 --------------------------------------------- 
 " >> ${LOGFILE}
 
@@ -31,7 +31,7 @@ rsync -vPhaze "ssh -i /root/.ssh/id_rsa -p ${REMOTE_PORT}" ${REMOTE_USER}@${REMO
 
 echo -e "
 ---------------------------------------------
-END Copying MySQL dir -  $(date '+%Y %b %d _ %H:%M')
+END Copying MySQL dir -  $(date '+%Y %b %d _ %H:%M:%S')
 \n\n" >> ${LOGFILE}
 
 # NOTES
