@@ -16,7 +16,9 @@ LOGFILE="${HOME}/rsync_log.txt"
 #REMOTE_HOST='123.123.123.123' # server 1
 REMOTE_HOST='456.456.456.456' # server 2
 REMOTE_USER='root'
-REMOTE_PORT='2200'
+REMOTE_PORT='22'
+REMOTE_PATH='/var/lib/mysql/'
+LOCAL_PATH='/var/lib/mysql/'
 
 # Create log file
 touch ${LOGFILE}
@@ -27,7 +29,7 @@ START Copying MySQL dir -  $(date '+%Y %b %d _ %H:%M:%S')
 " >> ${LOGFILE}
 
 # Sync MySQL databases (with users and permissions)
-rsync -vPhaze "ssh -i /root/.ssh/id_rsa -p ${REMOTE_PORT}" ${REMOTE_USER}@${REMOTE_HOST}:/var/lib/mysql/ /var/lib/mysql/ &>> ${LOGFILE}
+rsync -vPhaze "ssh -i /root/.ssh/id_rsa -p ${REMOTE_PORT}" ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH} ${LOCAL_PATH} &>> ${LOGFILE}
 
 echo -e "
 ---------------------------------------------
