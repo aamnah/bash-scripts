@@ -16,26 +16,24 @@ Scripts are sorted into folders according to their general purpose.
 │   ├── imgcat.sh
 │   ├── ioncube.sh
 │   ├── nodejs.sh
+│   ├── nvm.sh
 │   ├── opencart.sh
 │   ├── sublime.sh
 │   ├── todotxt_debian.sh
 │   ├── todotxt.sh
-│   └── webmin_debian.sh
+│   ├── webmin_debian.sh
+│   └── yarn.sh
 ├── README.md
 └── setup
     ├── dev_macos.sh
     └── virtualhost.sh
 
-3 directories, 16 files
+3 directories, 18 files
 ```
 
 ## copy_mysql_databases.sh
 
 Copies `/var/lib/mysql` from remote server to local `/var/lib/mysql` directory, essentially copying all MySQL Databases with Users and Permissions,  and logs the progress in a text file.
-
-## dev_macos.sh
-
-Installs common dev tools for macOS using Homebrew and Casks. Needs to be updated to add more tools but a good functional starting point.
 
 ## amp_debian.sh
 
@@ -119,7 +117,7 @@ curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/img
 
 Installs ionCube loader on a Debain Ubuntu system. May require some testing, don't remember if it worked flawlessly.
 
-## nodejs.sh
+## nodejs_arm.sh
 
 Removes the pre-installed Node.js on Raspbery Pi (Raspbian Jessy) and installs the latest release. The script:
 
@@ -134,6 +132,10 @@ To run, simply do `bash nodejs.sh`. To run remotely:
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/nodejs.sh | bash
 ```
+
+## nvm.sh
+
+Installs [Node Version Manager](https://github.com/creationix/nvm) and Node LTS version.
 
 ## opencart.sh
 
@@ -202,6 +204,14 @@ Installs Webmin on Debian. Adds Webmin to `sources.list`, adds GPG key, updates 
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/webmin_debian.sh | bash
 ```
 
+## yarn.sh
+
+- Installs [Yarn](https://yarnpkg.com/en/) dependency manager for Node. 
+- Adds the install location to PATH
+
+## dev_macos.sh
+
+Installs common dev tools for macOS using Homebrew and Casks. Needs to be updated to add more tools but a good functional starting point.
 
 ## virtualhost.sh
 Creates a virtual host file. The script can take one or more argument in the form of domain name, like `mydomain.com`.
