@@ -58,7 +58,7 @@ A rough script that takes care of all the steps in installing and setting up a F
 - creates `__init__.py`
 - restarts Apache
 
-To run, simply do `bash install_flask.sh`. To run remotely:
+To run, simply do `bash flask.sh`. To run remotely:
 
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/flask.sh | bash
@@ -90,7 +90,7 @@ Note: LAMP needs to be installed already
 - Sets alias `img`
 - Adds to `$PATH`
 
-To run, simply do `bash install_imgcat.sh`. To run remotely:
+To run, simply do `bash imgcat.sh`. To run remotely:
 
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/imgcat.sh | bash
@@ -106,7 +106,7 @@ Removes the pre-installed Node.js on Raspbery Pi (Raspbian Jessy) and installs t
 - Cleans up temporary install files and `autoremove`
 - Confirms successful install and Node.js version
 
-To run, simply do `bash install_nodejs.sh`. To run remotely:
+To run, simply do `bash nodejs.sh`. To run remotely:
 
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/nodejs.sh | bash
@@ -124,13 +124,22 @@ Installs any opencart version between 1.5.6 and 3.0.2.0 The script:
 
 To finish the installation, go to `/install` in your browser (http://yourdomain.com/install)
 
-To run, simply do `bash install_opencart.sh`. To run remotely:
+To run, simply do `bash opencart.sh`. To run remotely:
 
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/opencart.sh | bash
 ```
+### install/sublime.sh
 
-### install_todotxt.sh
+- Adds Sublime HQ repo for both Sublime Text and Sublime Merge (it's the same repo for both)
+- Installs [Sublime Text](https://www.sublimetext.com/)
+- Installs [Sublime Merge](https://www.sublimemerge.com/)
+
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/sublime.sh | bash
+```
+
+### install/todotxt.sh
 Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo application - in the default Dropbox folder on a Mac. Also configures the recommended [tweaks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks). 
 
 The tweaks are:
@@ -148,24 +157,24 @@ Requires: `wget`
 Execute script remotely:
 
 ```bash
-curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt.sh | bash -s
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/todotxt.sh | bash -s
 ```
 
-### install_todotxt_debian.sh
+### install/todotxt_debian.sh
 
-Same as `install_todotxt.sh`, just different install directory. Uses a `folder_name` variable that can be customized by editing the script.
+Same as `install/todotxt.sh`, just different install directory. Uses a `folder_name` variable that can be customized by editing the script.
 
 run:
 
 ```bash
-curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_todotxt_debian.sh | bash -s
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/todotxt_debian.sh | bash -s
 ```
 
 The default install location is: ~/todo
 
-### install_webmin_debian.sh
+### install/webmin_debian.sh
 Installs Webmin on Debian. Adds Webmin to `sources.list`, adds GPG key, updates apt and installs Webmin. Also adds a rule for Webmin in UFW.
 
 ```bash
-curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_webmin_debian.sh | bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/webmin_debian.sh | bash
 ```
