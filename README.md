@@ -3,7 +3,7 @@ Bash Scripts
 
 Misc. bash scripts that i write mostly for fun. These are written for good practice, for tasks i occassionally need to do that involve multiple steps.
 
-All **install scripts** begin with a `install_` in the file name.
+Scripts in the `install/` directory are for installing stuff, obviously.
 
 ### create_virtualhost.sh
 Creates a virtual host file. The script can take one or more argument in the form of domain name, like `mydomain.com`.
@@ -32,7 +32,7 @@ Notes:
 - The `PHPINIDir` directive in the virtual host conf file  will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
 - Sets the directory ownership for the user who ran the script 
 
-### install_amp_debian.sh
+### install/amp_debian.sh
 
 Install Apache, MySQL, PHP and phpMyAdmin
 
@@ -41,11 +41,11 @@ Install Apache, MySQL, PHP and phpMyAdmin
 - does not overwrite the MySQL password if it is already set
 
 ```bash
-curl https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_amp_debian.sh | bash
+curl https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/amp_debian.sh | bash
 ```
 
 
-### install_flask.sh
+### install/flask.sh
 A rough script that takes care of all the steps in installing and setting up a Flask project. There are variables you can edit before running the script. At present, the script does the following:
 
 - apt Update and Upgrade
@@ -61,10 +61,10 @@ A rough script that takes care of all the steps in installing and setting up a F
 To run, simply do `bash install_flask.sh`. To run remotely:
 
 ```bash
-curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_flask.sh | bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/flask.sh | bash
 ```
 
-### install_froxlor_debian.sh
+### install/froxlor_debian.sh
 Installs [Froxlor](https://froxlor.org/) Server Management Panel.
 
 What it does:
@@ -78,12 +78,12 @@ What it does:
 Execute remotely: 
 
 ```bash
-curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_froxlor_debian.sh | bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/froxlor_debian.sh | bash
 ```
 
 Note: LAMP needs to be installed already
 
-### install_imgcat.sh
+### install/imgcat.sh
 
 [imgcat](https://www.iterm2.com/images.html) is a script that previews images and GIFs right in the Terminal. You can see a gif in the Terminal with `img foo.gif` or a jpeg with `img bar.jpg`..
 
@@ -93,10 +93,10 @@ Note: LAMP needs to be installed already
 To run, simply do `bash install_imgcat.sh`. To run remotely:
 
 ```bash
-curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_imgcat.sh | bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/imgcat.sh | bash
 ```
 
-### install_nodejs.sh
+### install/nodejs.sh
 
 Removes the pre-installed Node.js on Raspbery Pi (Raspbian Jessy) and installs the latest release. The script:
 
@@ -109,10 +109,12 @@ Removes the pre-installed Node.js on Raspbery Pi (Raspbian Jessy) and installs t
 To run, simply do `bash install_nodejs.sh`. To run remotely:
 
 ```bash
-curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_nodejs.sh | bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/nodejs.sh | bash
 ```
 
-### install_opencart.sh
+### install/opencart.sh
+
+NOTE: I stopped working with OpenCart years ago and haven't looked at this scrip in a very long time. May not work as expected anymore..
 
 Installs any opencart version between 1.5.6 and 3.0.2.0 The script:
 
@@ -125,7 +127,7 @@ To finish the installation, go to `/install` in your browser (http://yourdomain.
 To run, simply do `bash install_opencart.sh`. To run remotely:
 
 ```bash
-curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_opencart.sh | bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/opencart.sh | bash
 ```
 
 ### install_todotxt.sh
