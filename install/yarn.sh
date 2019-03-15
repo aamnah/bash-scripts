@@ -11,7 +11,7 @@ install_yarn () {
   # update sources
   sudo apt update
 
-  echo -e "\n  Installing Yarn .."
+  echo -e "\n\n  Installing Yarn .."
   # since using nvm, avoid the node installation with `--no-install-recommends`
   sudo apt install --no-install-recommends yarn
 }
@@ -19,7 +19,7 @@ install_yarn () {
 
 install_yarn
 
-echo -e "\n  DONE. $(yarn --version) is installed. \n"
+echo -e "\n  DONE. Yarn $(yarn --version) is installed. \n"
 
 
 
