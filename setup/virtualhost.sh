@@ -4,7 +4,7 @@
 #         Author: Aamnah Akram
 #           Link: http://github.com/aamnah/bash-scripts
 #    Description: Sets up a domain for hosting
-#            Run: bash create_virtualhost.sh mydomain.com
+#            Run: bash setup_virtualhost.sh mydomain.com
 ###################################################################
 
 # TO-DO
