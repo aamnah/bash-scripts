@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # check if apaceh is installed, if not, install apache
 # check if pip is installed, if not, install pip
 # check if virtualenv is installed, if not, install virtualenv

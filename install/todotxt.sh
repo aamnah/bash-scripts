@@ -1,11 +1,11 @@
 #!/bin/bash
 
-####
+###################################################################
 #      Author: Aamnah Akram
 #        Link: http://github.com/aamnah/bash-scripts
 # Description: this script installs [todo.txt](http://todotxt.com/) 
 #              in the default Dropbox folder on a Mac
-####
+###################################################################
 
 # Color Reset
 Color_Off='\033[0m'       # Text Reset

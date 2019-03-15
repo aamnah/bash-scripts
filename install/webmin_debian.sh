@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Install Webmin on Debian
 
 # add the Webmin repository to `sources.list`

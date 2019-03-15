@@ -1,11 +1,15 @@
 #!/bin/bash
-# Author: Aamnah Akram
-# URL: http://aamnah.com
-# Email: hello@aamnah.com
-# Description: Bash script to install Opencart
-# Usage: You can use 'curl' to run this script directly from Github.
-# curl -L https://raw.githubusercontent.com/aamnah/bash-scripts/master/install_opencart.sh | bash
-# Run the script from the directory you want to install opencart in
+
+###################################################################
+#         Author: Aamnah Akram
+#           Link: http://github.com/aamnah/bash-scripts
+#    Description: Bash script to install Opencart
+#          Usage: You can use 'curl' to run this script directly from Github.
+# curl -L https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/opencart.sh | bash
+#                 Run the script from the directory you want to install opencart in
+###################################################################
+
+
 
 # TODO
 # [x] File and folder permissions for install https://gist.github.com/aamnah/9cab2942f42d5fe7035d

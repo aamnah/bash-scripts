@@ -1,3 +1,11 @@
+#!/bin/bash
+
+###################################################################
+#         Author: Aamnah Akram
+#           Link: http://github.com/aamnah/bash-scripts
+#    Description: Install Sublime Text and Sublime Merge on Debian Ubuntu
+###################################################################
+
 add_sublime_repo () {
 	echo -e "\n\n  Installing SublimeHQ Repo .. "
 

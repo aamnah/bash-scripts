@@ -1,10 +1,9 @@
 #!/bin/bash
-
-#####
-# Description: Script to remove old and install latest Node.js on Raspberry Pi (Raspbian Jessie)
-# Author: Aamnah
-# Link: http://aamnah.com
-#####
+###################################################################
+#         Author: Aamnah Akram
+#           Link: http://github.com/aamnah/bash-scripts
+#    Description: Script to remove old and install latest Node.js on Raspberry Pi (Raspbian Jessie)
+###################################################################
 
 nodeVersion=`node -v`
 

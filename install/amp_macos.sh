@@ -2,10 +2,10 @@
 
 ###############################################################################
 #
-# AUTHOR: Aamnah
-# LINK: http://aamnah.com
+#      AUTHOR: Aamnah
+#        LINK: http://github.com/aamnah/bash-scripts
 # DESCRIPTION: Install Apache, MySQL and PHP on macOS High Sierra
-# VERSION: 0.8
+#     VERSION: 0.8
 # REFERENCE 1: https://getgrav.org/blog/macos-sierra-apache-multiple-php-versions
 # REFERENCE 2: https://praxent.com/blog/native-lamp-stack-mac-os-x
 #
