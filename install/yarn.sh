@@ -14,6 +14,12 @@ install_yarn () {
   echo -e "\n\n  Installing Yarn .."
   # since using nvm, avoid the node installation with `--no-install-recommends`
   sudo apt install --no-install-recommends yarn
+
+  # You have to add Yarn to $PATH in order to run it globally
+  echo -e "\n\n  Adding Yarn to PATH"
+  echo -e "
+## PATH - Yarn
+export PATH=$PATH:$(yarn global bin)" >> ~/.bashrc
 }
 
 
@@ -26,3 +32,4 @@ echo -e "\n  DONE. Yarn $(yarn --version) is installed. \n"
 
 # LINKS
 # https://yarnpkg.com/en/docs/install#debian-stable
+# https://yarnpkg.com/lang/en/docs/cli/global/
