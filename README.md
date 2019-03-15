@@ -4,7 +4,7 @@ Misc. bash scripts that i write mostly for fun. These are written for good pract
 
 Scripts in the `install/` directory are for installing stuff, obviously.
 
-### create_virtualhost.sh
+## create_virtualhost.sh
 Creates a virtual host file. The script can take one or more argument in the form of domain name, like `mydomain.com`.
 e.g:
 
@@ -31,9 +31,7 @@ Notes:
 - The `PHPINIDir` directive in the virtual host conf file  will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
 - Sets the directory ownership for the user who ran the script 
 
-## install scripts
-
-### amp_debian.sh
+## amp_debian.sh
 
 Install Apache, MySQL, PHP and phpMyAdmin
 
@@ -45,8 +43,22 @@ Install Apache, MySQL, PHP and phpMyAdmin
 curl https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/amp_debian.sh | bash
 ```
 
+## amp_macos.sh
 
-### flask.sh
+- Installs Homebrew if not installed
+- Installs XCode Command Line Tools if not installed
+- Installs Apache with Homebrew
+- Creates ~/Sites directory if not exists
+- Confgiures Apache conf file using sed
+- Confgiures Apache Virtual Hosts
+- Installs PHP with Homebrew
+- Installs common PHP Extensions (e.g. mcrypt required by OpenCart)
+- Confgiures PHP conf file using sed
+- Installs MariaDB with Homebrew
+- Installs Sequel-Pro with Homebrew Cask
+- Installs Dnsmasq with Homebrew and configures it
+
+## flask.sh
 A rough script that takes care of all the steps in installing and setting up a Flask project. There are variables you can edit before running the script. At present, the script does the following:
 
 - apt Update and Upgrade
@@ -65,7 +77,7 @@ To run, simply do `bash flask.sh`. To run remotely:
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/flask.sh | bash
 ```
 
-### froxlor_debian.sh
+## froxlor_debian.sh
 Installs [Froxlor](https://froxlor.org/) Server Management Panel.
 
 What it does:
@@ -84,7 +96,7 @@ curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/fro
 
 Note: LAMP needs to be installed already
 
-### imgcat.sh
+## imgcat.sh
 
 [imgcat](https://www.iterm2.com/images.html) is a script that previews images and GIFs right in the Terminal. You can see a gif in the Terminal with `img foo.gif` or a jpeg with `img bar.jpg`..
 
@@ -97,7 +109,11 @@ To run, simply do `bash imgcat.sh`. To run remotely:
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/imgcat.sh | bash
 ```
 
-### nodejs.sh
+## ioncube.sh
+
+Installs ionCube loader on a Debain Ubuntu system. May require some testing, don't remember if it worked flawlessly.
+
+## nodejs.sh
 
 Removes the pre-installed Node.js on Raspbery Pi (Raspbian Jessy) and installs the latest release. The script:
 
@@ -113,7 +129,7 @@ To run, simply do `bash nodejs.sh`. To run remotely:
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/nodejs.sh | bash
 ```
 
-### opencart.sh
+## opencart.sh
 
 NOTE: I stopped working with OpenCart years ago and haven't looked at this scrip in a very long time. May not work as expected anymore..
 
@@ -130,7 +146,7 @@ To run, simply do `bash opencart.sh`. To run remotely:
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/opencart.sh | bash
 ```
-### sublime.sh
+## sublime.sh
 
 - Adds Sublime HQ repo for both Sublime Text and Sublime Merge (it's the same repo for both)
 - Installs [Sublime Text](https://www.sublimetext.com/)
@@ -140,7 +156,19 @@ curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/ope
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/sublime.sh | bash
 ```
 
-### todotxt.sh
+## todotxt_debian.sh
+
+Same as `install/todotxt.sh`, just different install directory. Uses a `folder_name` variable that can be customized by editing the script.
+
+run:
+
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/todotxt_debian.sh | bash -s
+```
+
+The default install location is: `~/todo`
+
+## todotxt.sh
 Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo application - in the default Dropbox folder on a Mac. Also configures the recommended [tweaks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks). 
 
 The tweaks are:
@@ -161,19 +189,7 @@ Execute script remotely:
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/todotxt.sh | bash -s
 ```
 
-### todotxt_debian.sh
-
-Same as `install/todotxt.sh`, just different install directory. Uses a `folder_name` variable that can be customized by editing the script.
-
-run:
-
-```bash
-curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/todotxt_debian.sh | bash -s
-```
-
-The default install location is: ~/todo
-
-### webmin_debian.sh
+## webmin_debian.sh
 Installs Webmin on Debian. Adds Webmin to `sources.list`, adds GPG key, updates apt and installs Webmin. Also adds a rule for Webmin in UFW.
 
 ```bash
