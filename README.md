@@ -31,8 +31,6 @@ Notes:
 - The `PHPINIDir` directive in the virtual host conf file  will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
 - Sets the directory ownership for the user who ran the script 
 
----
-
 ## install scripts
 
 ### amp_debian.sh
