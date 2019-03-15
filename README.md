@@ -2,34 +2,40 @@
 
 Misc. bash scripts that i write mostly for fun. These are written for good practice, for tasks i occassionally need to do that involve multiple steps.
 
-Scripts in the `install/` directory are for installing stuff, obviously.
+Scripts are sorted into folders according to their general purpose.
 
-## create_virtualhost.sh
-Creates a virtual host file. The script can take one or more argument in the form of domain name, like `mydomain.com`.
-e.g:
+```
+.
+├── backups
+│   └── copy_mysql_databases.sh
+├── install
+│   ├── amp_debian.sh
+│   ├── amp_macos.sh
+│   ├── flask.sh
+│   ├── froxlor_debian.sh
+│   ├── imgcat.sh
+│   ├── ioncube.sh
+│   ├── nodejs.sh
+│   ├── opencart.sh
+│   ├── sublime.sh
+│   ├── todotxt_debian.sh
+│   ├── todotxt.sh
+│   └── webmin_debian.sh
+├── README.md
+└── setup
+    ├── dev_macos.sh
+    └── virtualhost.sh
 
-```bash
-bash create_virtualhost.sh domain1.com domain2.com domain3.com
+3 directories, 16 files
 ```
 
-For every domain, the script:
-- creates directory structure
-- grants permissions
-- creates demo `index.html` for virtual host 
-- creates new virtual host file
-- enables the new virtual host file
+## copy_mysql_databases.sh
 
-The script also restarts Apache after all domains are set up.
+Copies `/var/lib/mysql` from remote server to local `/var/lib/mysql` directory, essentially copying all MySQL Databases with Users and Permissions,  and logs the progress in a text file.
 
-Execute remotely: 
+## dev_macos.sh
 
-```bash
-curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/create_virtualhost.sh | bash -s mydomain.com
-```
-
-Notes: 
-- The `PHPINIDir` directive in the virtual host conf file  will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
-- Sets the directory ownership for the user who ran the script 
+Installs common dev tools for macOS using Homebrew and Casks. Needs to be updated to add more tools but a good functional starting point.
 
 ## amp_debian.sh
 
@@ -195,3 +201,31 @@ Installs Webmin on Debian. Adds Webmin to `sources.list`, adds GPG key, updates 
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/webmin_debian.sh | bash
 ```
+
+
+## virtualhost.sh
+Creates a virtual host file. The script can take one or more argument in the form of domain name, like `mydomain.com`.
+e.g:
+
+```bash
+bash virtualhost.sh domain1.com domain2.com domain3.com
+```
+
+For every domain, the script:
+- creates directory structure
+- grants permissions
+- creates demo `index.html` for virtual host 
+- creates new virtual host file
+- enables the new virtual host file
+
+The script also restarts Apache after all domains are set up.
+
+Execute remotely: 
+
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/setup/virtualhost.sh | bash -s mydomain.com
+```
+
+Notes: 
+- The `PHPINIDir` directive in the virtual host conf file  will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
+- Sets the directory ownership for the user who ran the script 
