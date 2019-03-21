@@ -13,7 +13,7 @@
 
 for file in ./*.{jpg,jpeg,png}
 do
-  cp "$file" "$(echo $file | awk '{print tolower($0)}' | sed 's/ /_/g')"
+  mv "$file" "$(echo $file | awk '{print tolower($0)}' | sed 's/ /_/g')"
 done
 
 # NOTES:
