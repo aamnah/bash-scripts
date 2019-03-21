@@ -6,29 +6,32 @@ Scripts are sorted into folders according to their general purpose.
 
 ```
 .
-├── backups
-│   └── copy_mysql_databases.sh
-├── install
-│   ├── amp_debian.sh
-│   ├── amp_macos.sh
-│   ├── flask.sh
-│   ├── froxlor_debian.sh
-│   ├── imgcat.sh
-│   ├── ioncube.sh
-│   ├── nodejs.sh
-│   ├── nvm.sh
-│   ├── opencart.sh
-│   ├── sublime.sh
-│   ├── todotxt_debian.sh
-│   ├── todotxt.sh
-│   ├── webmin_debian.sh
-│   └── yarn.sh
 ├── README.md
+├── backups
+│   └── copy_mysql_databases.sh
+├── install
+│   ├── amp_debian.sh
+│   ├── amp_macos.sh
+│   ├── flask.sh
+│   ├── froxlor_debian.sh
+│   ├── imgcat.sh
+│   ├── ioncube.sh
+│   ├── nodejs_arm.sh
+│   ├── nvm.sh
+│   ├── opencart.sh
+│   ├── sublime.sh
+│   ├── todotxt.sh
+│   ├── todotxt_debian.sh
+│   ├── webmin_debian.sh
+│   └── yarn.sh
+├── misc
+│   └── batch_rename_snake_case.sh
 └── setup
     ├── dev_macos.sh
+    ├── dev_ubuntu.sh
     └── virtualhost.sh
 
-3 directories, 18 files
+4 directories, 20 files
 ```
 
 ## copy_mysql_databases.sh
@@ -209,6 +212,15 @@ curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/web
 - Installs [Yarn](https://yarnpkg.com/en/) dependency manager for Node. 
 - Adds the install location to PATH
 
+## batch_rename_snake_case.sh
+
+- Renames all image files in the current folder in snake_case
+
+The file extensions (jpeg/jpg/png) can easily be updated or removed.
+
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/misc/batch_rename_snake_case.sh | bash
+```
 ## dev_macos.sh
 
 Installs common dev tools for macOS using Homebrew and Casks. Needs to be updated to add more tools but a good functional starting point.
