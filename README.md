@@ -12,6 +12,7 @@ Scripts are sorted into folders according to their general purpose.
 ├── install
 │   ├── amp_debian.sh
 │   ├── amp_macos.sh
+│   ├── dotnet_core_3_debian.sh
 │   ├── flask.sh
 │   ├── froxlor_debian.sh
 │   ├── imgcat.sh
@@ -36,7 +37,7 @@ Scripts are sorted into folders according to their general purpose.
 
 ## copy_mysql_databases.sh
 
-Copies `/var/lib/mysql` from remote server to local `/var/lib/mysql` directory, essentially copying all MySQL Databases with Users and Permissions,  and logs the progress in a text file.
+Copies `/var/lib/mysql` from remote server to local `/var/lib/mysql` directory, essentially copying all MySQL Databases with Users and Permissions, and logs the progress in a text file.
 
 ## amp_debian.sh
 
@@ -66,6 +67,7 @@ curl https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/amp_de
 - Installs Dnsmasq with Homebrew and configures it
 
 ## flask.sh
+
 A rough script that takes care of all the steps in installing and setting up a Flask project. There are variables you can edit before running the script. At present, the script does the following:
 
 - apt Update and Upgrade
@@ -85,9 +87,11 @@ curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/fla
 ```
 
 ## froxlor_debian.sh
+
 Installs [Froxlor](https://froxlor.org/) Server Management Panel.
 
 What it does:
+
 - adds Froxlor repo
 - adds Froxlor approve key for packages
 - updates system
@@ -95,7 +99,7 @@ What it does:
 - sets directory permissions
 - provides a link to continue with web install
 
-Execute remotely: 
+Execute remotely:
 
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/froxlor_debian.sh | bash
@@ -157,6 +161,7 @@ To run, simply do `bash opencart.sh`. To run remotely:
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/opencart.sh | bash
 ```
+
 ## sublime.sh
 
 - Adds Sublime HQ repo for both Sublime Text and Sublime Merge (it's the same repo for both)
@@ -180,7 +185,8 @@ curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/tod
 The default install location is: `~/todo`
 
 ## todotxt.sh
-Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo application - in the default Dropbox folder on a Mac. Also configures the recommended [tweaks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks). 
+
+Installs [todo.txt](http://todotxt.com/) - a minimal command line based todo application - in the default Dropbox folder on a Mac. Also configures the recommended [tweaks](https://github.com/ginatrapani/todo.txt-cli/wiki/Tips-and-Tricks).
 
 The tweaks are:
 
@@ -201,6 +207,7 @@ curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/tod
 ```
 
 ## webmin_debian.sh
+
 Installs Webmin on Debian. Adds Webmin to `sources.list`, adds GPG key, updates apt and installs Webmin. Also adds a rule for Webmin in UFW.
 
 ```bash
@@ -209,7 +216,7 @@ curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/web
 
 ## yarn.sh
 
-- Installs [Yarn](https://yarnpkg.com/en/) dependency manager for Node. 
+- Installs [Yarn](https://yarnpkg.com/en/) dependency manager for Node.
 - Adds the install location to PATH
 
 ## batch_rename_snake_case.sh
@@ -221,11 +228,13 @@ The file extensions (jpeg/jpg/png) can easily be updated or removed.
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/misc/batch_rename_snake_case.sh | bash
 ```
+
 ## dev_macos.sh
 
 Installs common dev tools for macOS using Homebrew and Casks. Needs to be updated to add more tools but a good functional starting point.
 
 ## virtualhost.sh
+
 Creates a virtual host file. The script can take one or more argument in the form of domain name, like `mydomain.com`.
 e.g:
 
@@ -234,20 +243,22 @@ bash virtualhost.sh domain1.com domain2.com domain3.com
 ```
 
 For every domain, the script:
+
 - creates directory structure
 - grants permissions
-- creates demo `index.html` for virtual host 
+- creates demo `index.html` for virtual host
 - creates new virtual host file
 - enables the new virtual host file
 
 The script also restarts Apache after all domains are set up.
 
-Execute remotely: 
+Execute remotely:
 
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/setup/virtualhost.sh | bash -s mydomain.com
 ```
 
-Notes: 
-- The `PHPINIDir` directive in the virtual host conf file  will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
-- Sets the directory ownership for the user who ran the script 
+Notes:
+
+- The `PHPINIDir` directive in the virtual host conf file will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
+- Sets the directory ownership for the user who ran the script
