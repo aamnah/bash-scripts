@@ -24,7 +24,8 @@ Scripts are sorted into folders according to their general purpose.
 │   ├── todotxt.sh
 │   ├── todotxt_debian.sh
 │   ├── webmin_debian.sh
-│   └── yarn.sh
+│   ├── yarn.sh
+│   └── youtube-dl_debain.sh
 ├── misc
 │   └── batch_rename_snake_case.sh
 └── setup
