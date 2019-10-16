@@ -18,7 +18,7 @@ uninstall_node () {
 
 install_nvm () {
   echo -e "\n\n ----- Installing NVM (Node Version Manager) .."
-  wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+  wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.35.0/install.sh | bash
 
   # make sure the source lines added to `~/.bashrc` are loaded in current terminal
   # otherwise the rest of the script will give a 'nvm: command not found' error
