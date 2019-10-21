@@ -3,11 +3,16 @@
 # Taken from: https://tldrdevnotes.com/misc/youtube-dl_audio_download/
 
 echo -e "\n Installing youtube-dl ... \n"
-# install youtube-dl
+# install latest youtube-dl version
 #sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-sudo chmod a+rx /usr/local/bin/youtube-dl
-source ${HOME}/.bashrc 
+#sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+#sudo chmod a+rx /usr/local/bin/youtube-dl
+
+# Ubuntu
+# an older version is available in the repos. 
+# You can install that and run with `--update` to get to the latest version
+sudo apt install youtube-dl
+youtube-dl --update
 
 # install ffmpeg to be able to convert video files to audio
 sudo apt install -y ffmpeg
@@ -45,7 +50,7 @@ else
 fi
 
 # reload Bash so that the alias works right away
-source ~/.bashrc
+source ${HOME}/.bashrc 
 #source ${HOME}/.bash_profile
 
 echo -e " 
