@@ -193,7 +193,7 @@ SETUP() {
   installCertbot
   installSSL
 
-  echo -e "${Green}${DOMAIN} has been successfully set up! ${Color_Off}"
+  echo -e "${Cyan}${DOMAIN} has been successfully set up! ${Color_Off}"
 }
 
 # EXECUTE
