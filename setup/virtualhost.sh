@@ -162,12 +162,12 @@ createConf() {
 
 installCertbot() {
   # install Let's Encrypt Certbot
-  sudo apt-get update
-  sudo apt-get install software-properties-common
+  sudo apt-get update -qq 
+  sudo apt-get install -qq software-properties-common
+  sudo add-apt-repository universe
   sudo add-apt-repository ppa:certbot/certbot
-  sudo apt-get update
-  sudo apt-get install python-certbot-apache
-  sudo certbot --apache
+  sudo apt-get update -qq 
+  sudo apt-get install -qq certbot python3-certbot-apache
 }
 
 installSSL() {
@@ -189,9 +189,9 @@ SETUP() {
   setPerms
   demoFile
 
-  echo -e "${Green}Installing SSL on ${DOMAIN} ${Color_Off}"
-  installCertbot
-  installSSL
+  #echo -e "${Green}Installing SSL on ${DOMAIN} ${Color_Off}"
+  #installCertbot
+  #installSSL
 
   echo -e "${Cyan}${DOMAIN} has been successfully set up! ${Color_Off}"
 }
