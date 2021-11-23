@@ -259,6 +259,12 @@ Execute remotely:
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/setup/virtualhost.sh | bash -s mydomain.com
 ```
 
+with `sudo` 
+
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/setup/virtualhost.sh | sudo bash -s mydomain.com
+```
+
 Notes:
 
 - The `PHPINIDir` directive in the virtual host conf file will give an Apache config test failed error if PHP is not installed on the system. Either install PHP (why not?) or remove the directive.
