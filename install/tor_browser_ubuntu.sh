@@ -2,6 +2,7 @@
 
 # Install Tor Browser from the command line
 # Author: Aamnah <hello@aamnah.com>
+# https://github.com/aamnah/bash-scripts/blob/master/install/tor_browser_ubuntu.sh
 
 VERSION='11.5' # <-- update this to match latest version, update rest of the variables only if needed
 ARCHITECTURE='64'
@@ -29,7 +30,8 @@ echo -e "\n Downloading signature .. \n"
 wget -O ${SIGNATURE} https://www.torproject.org/dist/torbrowser/${VERSION}/tor-browser-linux${ARCHITECTURE}-${VERSION}_${LANG}.tar.xz.asc
 
 
-# Verify package signature
+# Import GPG key and Verify package with signature 
+
 echo -e "\n Verifying signature .. \n"
 gpg --auto-key-locate nodefault,wkd --locate-keys torbrowser@torproject.org # import key
 gpg --output ${GPG_KEY} --export 0xEF6E286DDA85EA2A4BA7DE684E2C6E8793298290 # save key to file

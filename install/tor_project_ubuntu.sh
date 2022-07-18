@@ -3,6 +3,7 @@
 # Install Tor Project from official project's source repo
 # Run this script with sudo
 # Author: Aamnah <hello@aamnah.com>
+# https://github.com/aamnah/bash-scripts/blob/master/install/tor_project_ubuntu.sh
 
 GPG_KEY='/usr/share/keyrings/tor-archive-keyring.gpg'
 
