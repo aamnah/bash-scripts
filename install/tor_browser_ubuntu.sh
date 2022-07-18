@@ -25,8 +25,8 @@ wget -O ${PACKAGE} https://www.torproject.org/dist/torbrowser/${VERSION}/tor-bro
 
 # Download signature
 echo -e "\n Downloading signature .. \n"
-wget -O tor-browser-linux64-11.5_en-US.tar.xz.asc https://www.torproject.org/dist/torbrowser/11.5/tor-browser-linux64-11.5_en-US.tar.xz.asc 
-# wget -O ${SIGNATURE} https://www.torproject.org/dist/torbrowser/${VERSION}/tor-browser-linux${ARCHITECTURE}-${VERSION}_${LANG}.tar.xz.asc
+# wget https://www.torproject.org/dist/torbrowser/11.5/tor-browser-linux64-11.5_en-US.tar.xz.asc 
+wget -O ${SIGNATURE} https://www.torproject.org/dist/torbrowser/${VERSION}/tor-browser-linux${ARCHITECTURE}-${VERSION}_${LANG}.tar.xz.asc
 
 
 # Verify package signature
@@ -38,7 +38,7 @@ gpgv --keyring ${GPG_KEY} ${SIGNATURE} ${PACKAGE} # verify the signature of pack
 
 # Extract to install location
 echo -e "\n Extracting and moving to install location: ${INSTALL_DIR} .. \n"
-tar -xvf ${PACKAGE} # gives a folder like: tar-browser_en-US
+tar -xvf ${PACKAGE} # gives a folder like: tr-browser_en-US
 sudo mv ${EXTRACTED_FOLDER_NAME} ${INSTALL_DIR}
 
 
