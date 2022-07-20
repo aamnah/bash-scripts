@@ -13,6 +13,7 @@
 # DONE: check if Apache is installed
 # DONE: take multiple domains as input
 # set up hostnames `sudo nano /etc/hosts`
+# install SSL with Lets Encrypt
 
 # Color Reset
 Color_Off='\033[0m'       # Reset
@@ -159,6 +160,24 @@ createConf() {
 </VirtualHost>" > /etc/apache2/sites-available/${DOMAIN}.conf
 }
 
+installCertbot() {
+  # install Let's Encrypt Certbot
+  sudo apt-get update -qq 
+  sudo apt-get install -qq software-properties-common
+  sudo add-apt-repository universe
+  sudo add-apt-repository ppa:certbot/certbot
+  sudo apt-get update -qq 
+  sudo apt-get install -qq certbot python3-certbot-apache
+}
+
+installSSL() {
+  # install SSL
+  # will only install on the domains you provide when running the script, will not cover www versions..
+  # you can specify email with --email ${SSL_EMAIL}
+  # if no email, use the --register-unsafely-without-email flag
+  certbot --apache --non-interactive --agree-tos --register-unsafely-without-email --domains ${DOMAIN}
+}
+
 SETUP() {
   checkExistingConf # check if a .conf file exists for the given domain
   checkExistingDir # check if a directory in /var/www/ exists for the given domain
@@ -169,7 +188,12 @@ SETUP() {
   disableDefault
   setPerms
   demoFile
-  echo -e "${Green}${DOMAIN} has been successfully set up! ${Color_Off}"
+
+  #echo -e "${Green}Installing SSL on ${DOMAIN} ${Color_Off}"
+  #installCertbot
+  #installSSL
+
+  echo -e "${Cyan}${DOMAIN} has been successfully set up! ${Color_Off}"
 }
 
 # EXECUTE

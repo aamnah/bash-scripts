@@ -6,33 +6,38 @@ Scripts are sorted into folders according to their general purpose.
 
 ```
 .
-├── README.md
 ├── backups
-│   └── copy_mysql_databases.sh
+│   └── copy_mysql_databases.sh
 ├── install
-│   ├── amp_debian.sh
-│   ├── amp_macos.sh
-│   ├── dotnet_core_3_debian.sh
-│   ├── flask.sh
-│   ├── froxlor_debian.sh
-│   ├── imgcat.sh
-│   ├── ioncube.sh
-│   ├── nodejs_arm.sh
-│   ├── nvm.sh
-│   ├── opencart.sh
-│   ├── sublime.sh
-│   ├── todotxt.sh
-│   ├── todotxt_debian.sh
-│   ├── webmin_debian.sh
-│   └── yarn.sh
+│   ├── amp_debian.sh
+│   ├── amp_macos.sh
+│   ├── dotnet_core_3_debian.sh
+│   ├── flask.sh
+│   ├── froxlor_debian.sh
+│   ├── imgcat.sh
+│   ├── ioncube.sh
+│   ├── nodejs_arm.sh
+│   ├── nvm.sh
+│   ├── opencart.sh
+│   ├── smlnj_unix.sh
+│   ├── sublime.sh
+│   ├── todotxt_debian.sh
+│   ├── todotxt.sh
+│   ├── tor_browser_ubuntu.sh
+│   ├── tor_project_ubuntu.sh
+│   ├── webmin_debian.sh
+│   ├── yarn.sh
+│   └── youtube-dl_debian.sh
 ├── misc
-│   └── batch_rename_snake_case.sh
+│   └── batch_rename_snake_case.sh
+├── README.md
 └── setup
     ├── dev_macos.sh
     ├── dev_ubuntu.sh
     └── virtualhost.sh
 
-4 directories, 20 files
+4 directories, 25 files
+
 ```
 
 ## copy_mysql_databases.sh
@@ -162,6 +167,10 @@ To run, simply do `bash opencart.sh`. To run remotely:
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/opencart.sh | bash
 ```
 
+## smlnj.sh
+
+Installs Standard ML of New Jersey compiler and updates the PATH
+
 ## sublime.sh
 
 - Adds Sublime HQ repo for both Sublime Text and Sublime Merge (it's the same repo for both)
@@ -205,6 +214,13 @@ Execute script remotely:
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/install/todotxt.sh | bash -s
 ```
+
+## tor_browser_ubuntu.sh
+
+Installs the Tor browser (which has better network speed than Brave's Tor mode)
+## tor_project_ubuntu.sh
+
+Installs the Tor project which let's you do nifty things like masking your IP. For example: check IP with `curl ifconfig.me` and then change IP with `torify curl ifconfig.me 2>/dev/null`
 
 ## webmin_debian.sh
 
@@ -256,6 +272,12 @@ Execute remotely:
 
 ```bash
 curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/setup/virtualhost.sh | bash -s mydomain.com
+```
+
+with `sudo` 
+
+```bash
+curl -s https://raw.githubusercontent.com/aamnah/bash-scripts/master/setup/virtualhost.sh | sudo bash -s mydomain.com
 ```
 
 Notes:
