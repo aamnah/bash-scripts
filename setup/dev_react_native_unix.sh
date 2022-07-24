@@ -15,6 +15,10 @@ abort() {
   exit 1
 }
 
+log() {
+  printf "%s\n" "$@" >&2
+}
+
 # Check OS
 OS=$(uname) # Darwin means macOS, Linux means Ubuntu
 if [[ "${OS}" == "Linux" ]]
@@ -40,19 +44,19 @@ fi
 
 install_homebrew() {
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo -e "\n Homebrew version $(brew --version) installed"
+  log "Homebrew version $(brew --version) installed"
 }
 
 insatll_watchman() {
   # make sure Homebrew is installed first
   brew install watchman
-  echo -e "\n Watchman version $(watchman --version) installed"
+  log "Watchman version $(watchman --version) installed"
 }
 
 install_cocoapods() {
   # only run this on macOS
   brew install cocoapods
-  echo -e "\n Cocoapods version $(pod --version) installed"
+  log "Cocoapods version $(pod --version) installed"
 }
 
 
@@ -70,7 +74,7 @@ install_node_nvm() {
   nvm install --lts
   nvm alias default node
 
-  echo -e "\n Node version $(node --version) installed"
+  log "Node version $(node --version) installed"
 }
 
 
@@ -86,19 +90,21 @@ install_jdk() {
   fi
 
   source ${SHELL_PROFILE}
-  echo -e "\n Java version $(java --version) installed"
+
+  log "Java version $(java --version) installed"
 }
 
 
-install_homebrew
-insatll_watchman
-install_node_nvm
-install_jdk
+# install_homebrew
+# insatll_watchman
+# install_node_nvm
+# install_jdk
 
 # macOS only installs
 if [[ -z "${SETUP_ON_LINUX-}" ]]; then
   install_cocoapods
 fi
+
 
 # NOTES
 # if -z return true if strintg is null
