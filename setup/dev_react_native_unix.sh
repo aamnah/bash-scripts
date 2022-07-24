@@ -6,6 +6,13 @@
 # Lastmod: 2022-07-20
 # Status: Needs testing
 
+# Installs
+# - [x] Node with NVM
+# - [x] Homebrew
+# - [x] Watchman
+# - [x] Cocoapods (macOS only)
+# - [x] JDK
+
 JDK_VERSION=18
 NVM_VERSION=0.39.1
 
@@ -95,10 +102,10 @@ install_jdk() {
 }
 
 
-# install_homebrew
-# insatll_watchman
-# install_node_nvm
-# install_jdk
+install_homebrew
+insatll_watchman
+install_node_nvm
+install_jdk
 
 # macOS only installs
 if [[ -z "${SETUP_ON_LINUX-}" ]]; then
